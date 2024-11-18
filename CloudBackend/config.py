@@ -1,0 +1,15 @@
+import os
+
+SECRET_KEY = "secret_key"
+ALGORITHM = "HS256"
+ACCESS_TOKEN_EXPIRE_MINUTES = 200
+
+KEYSERVER = "http://127.0.0.1:8001"
+
+DB_USER = "root"
+DB_PASSWORD = "1211"
+DB_SERVER = "192.168.0.134"
+DB_NAME = "vaccine_cloud_server"
+
+
+SQLALCHEMY_DATABASE_URL = f"mysql+mysqlconnector://{DB_USER}:{DB_PASSWORD}@{DB_SERVER}/{DB_NAME}"
