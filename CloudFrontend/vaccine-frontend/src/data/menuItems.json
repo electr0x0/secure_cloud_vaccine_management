@@ -6,22 +6,10 @@
     "component" : "profile"
   },
   {
-    "label": "Manage Appointments",
-    "icon": "Calendar",
-    "user_group": "2",
-    "component" : "manage-appointments"
-  },
-  {
-    "label": "Vaccination Records",
+    "label": "Record Vaccination",
     "icon": "FileText",
     "user_group": "2",
-    "component" : "vaccination-records"
-  },
-  {
-    "label": "Book Appointment",
-    "icon": "Calendar",
-    "user_group": "1",
-    "component" : "book-appointment"
+    "component" : "vaccination-input-form"
   },
   {
     "label": "My Vaccinations",
@@ -34,12 +22,6 @@
     "icon": "BarChart",
     "user_group": "2",
     "component" : "reports"
-  },
-  {
-    "label": "Vaccine Inventory",
-    "icon": "Package",
-    "user_group": "2",
-    "component" : "vaccine-inventory"
   },
   {
     "label": "Health Tips",

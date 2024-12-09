@@ -35,26 +35,17 @@ const iconMap = {
 
 import { Faq } from "./faq";
 import { ProfileComponent } from "./profile";
-import { BookAppointmentComponent } from "./book-appointment";
 import { HealthTipsComponent } from "./health-tips";
-import { MyVaccinationsComponent } from "./my-vaccinations";
 import { ReportsComponent } from "./reports";
-import { VaccineInventoryComponent } from "./vaccine-inventory";
-import { VaccinationRecordsComponent } from "./vaccination-records";
+import VaccinationRecordComponent from "./vaccinator-input-form";
+import VaccinationDashboard from "./vaccination-dashboard";
 
-const componentMap = {
-  profile: ProfileComponent,
-  "book-appointment": BookAppointmentComponent,
-  reports: ReportsComponent,
-  "vaccination-records": VaccinationRecordsComponent,
-  "vaccine-inventory": VaccineInventoryComponent,
-  "my-vaccinations": MyVaccinationsComponent,
-  "health-tips": HealthTipsComponent,
-  faq: Faq,
-  // ... other components
-};
+import { getCurrentUserVaccineInfo } from "./api"
+
+
 
 export default function Dashboard() {
+  
   const [userGroup, setUserGroup] = useState(null);
   const [isExpanded, setIsExpanded] = useState(false);
   const [isPinned, setIsPinned] = useState(false);
@@ -69,6 +60,17 @@ export default function Dashboard() {
       setUserGroup(storedUserGroup);
     }
   }, [router]);
+
+
+  const componentMap = {
+    profile: ProfileComponent,
+    reports: ReportsComponent,
+    "vaccination-input-form": VaccinationRecordComponent,
+    "my-vaccinations": VaccinationDashboard,
+    "health-tips": HealthTipsComponent,
+    faq: Faq,
+    // ... other components
+  };
 
   const handleLogout = () => {
     sessionStorage.clear();
@@ -109,7 +111,7 @@ export default function Dashboard() {
               isExpanded || isPinned ? "opacity-100" : "opacity-0 w-0"
             )}
           >
-            Vax Dashboard
+            Vaccine Dashboard
           </h2>
           <Button
             variant="ghost"
