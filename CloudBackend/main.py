@@ -1,3 +1,4 @@
+import base64
 from fastapi import FastAPI, Depends, HTTPException, status
 from fastapi.security import OAuth2PasswordBearer
 from sqlalchemy.orm import Session
@@ -8,10 +9,13 @@ import uvicorn
 from fastapi.middleware.cors import CORSMiddleware
 from encryption import encrypt_with_public_key
 from config import KEYSERVER
-from sqlalchemy import and_
+from sqlalchemy import and_, func, extract
 from typing import List
+from utils import validate_identity
+from datetime import datetime
 
 import requests
+import json
 
 app = FastAPI()
 
@@ -86,42 +90,80 @@ def get_db():
 
 # Signup route
 @app.post("/register", response_model=schemas.UserResponse)
-def register(user: schemas.UserCreate, db: Session = Depends(get_db)):
-    # Check if email already exists
-    db_user = db.query(models.User).filter((models.User.email == user.email)).first()
-    if db_user:
-        raise HTTPException(status_code=400, detail="Email already registered")
+async def register(user: schemas.UserCreate, db: Session = Depends(get_db)):
+    try:
+        # First validate identity number format
+        if not validate_identity(user.identity_type, user.identity_number):
+            raise HTTPException(
+                status_code=400,
+                detail=f"Invalid {user.identity_type} format"
+            )
 
-    hashed_password = auth.get_password_hash(user.password)
+        # Check if user already exists
+        if db.query(models.User).filter(models.User.email == user.email).first():
+            raise HTTPException(
+                status_code=400,
+                detail="Email already registered"
+            )
 
-    keyserver_payload = {"user_email": user.email}
+        # Generate key pair from private key server
+        try:
+            key_response = requests.post(
+                f"{KEYSERVER}/generate-key-pair",
+                params={"user_email": user.email}
+            )
+            if key_response.status_code != 200:
+                raise HTTPException(
+                    status_code=500,
+                    detail="Failed to generate encryption keys"
+                )
+            public_key = key_response.json()["encoded_public_key"]
+        except Exception as e:
+            raise HTTPException(
+                status_code=500,
+                detail="Key server communication failed"
+            )
 
-    generate_key_pair = requests.post(
-        url=f"{KEYSERVER}/generate-key-pair", params=keyserver_payload
-    )
+        # Now encrypt sensitive data with the received public key
+        encrypted_identity = encrypt_with_public_key(public_key, user.identity_number)
+        encrypted_phone = encrypt_with_public_key(public_key, user.phone_number) if user.phone_number else None
 
-    response = generate_key_pair.json()
+        # Encrypt medical conditions if they exist
+        encrypted_medical_conditions = None
+        if user.medical_conditions:
+            medical_conditions_json = [condition.dict() for condition in user.medical_conditions]
+            # Convert to string for encryption
+            medical_conditions_str = json.dumps(medical_conditions_json)
+            encrypted_medical_conditions = encrypt_with_public_key(public_key, medical_conditions_str)
 
-    public_key = response["encoded_public_key"]
+        # Create user with encrypted data
+        db_user = models.User(
+            first_name=user.first_name,
+            last_name=user.last_name,
+            email=user.email,
+            user_type=user.user_type,
+            identity_type=user.identity_type,
+            identity_number=encrypted_identity,
+            phone_number=encrypted_phone,
+            medical_conditions=encrypted_medical_conditions,  # Store encrypted medical conditions
+            dob=user.dob,
+            hashed_password=auth.get_password_hash(user.password),
+            public_key=public_key
+        )
 
-    print(public_key)
+        db.add(db_user)
+        db.commit()
+        db.refresh(db_user)
 
-    db_user = models.User(
-        first_name=user.first_name,
-        last_name=user.last_name,
-        email=user.email,
-        user_type=int(user.user_type),
-        national_id=encrypt_with_public_key(public_key, user.national_id),
-        dob=user.dob,
-        hashed_password=hashed_password,
-        public_key=public_key,
-    )
+        return {"success": True, "message": "User registered successfully"}
 
-    db.add(db_user)
-    db.commit()
-    db.refresh(db_user)
-
-    return {"message": "successfully registered"}
+    except HTTPException as http_ex:
+        raise http_ex
+    except Exception as e:
+        raise HTTPException(
+            status_code=500,
+            detail=str(e)
+        )
 
 
 # Login route
@@ -143,27 +185,122 @@ def login(loginInfo: schemas.UserLogin, db: Session = Depends(get_db)):
     }
 
 
-@app.post("/user-info", response_model=schemas.UserInfoResponse)
-def get_user_info(token_input: schemas.TokenInput, db: Session = Depends(get_db)):
+@app.get("/api/user/info", response_model=schemas.UserInfoResponse)
+async def get_user_info(
+    token: str,
+    db: Session = Depends(get_db)
+):
+    try:
+        # Current user's information is already verified through the token
+        db_user = auth.get_current_user(token=token, db=db)
 
-    user = auth.get_current_user(token=token_input.token, db=db)
-
-    json = {"data": user.national_id, "token": token_input.token}
-
-    response = requests.post(url=f"{KEYSERVER}/decrypt-data", json=json).json()
-
-    if response["decrypted_data"]:
+        # Decrypt sensitive information
+        json = {"data": db_user.identity_number, "token": token}
+        identity_response = requests.post(url=f"{KEYSERVER}/decrypt-data", json=json).json()
+        
+        # Decrypt phone number if exists
+        phone_number = None
+        if db_user.phone_number:
+            json = {"data": db_user.phone_number, "token": token}
+            phone_response = requests.post(url=f"{KEYSERVER}/decrypt-data", json=json).json()
+            phone_number = phone_response["decrypted_data"]
+        
+        # Decrypt medical conditions if exists
+        medical_conditions = []
+        if db_user.medical_conditions:
+            json = {"data": db_user.medical_conditions, "token": token}
+            medical_response = requests.post(url=f"{KEYSERVER}/decrypt-data", json=json).json()
+            medical_conditions = medical_response["decrypted_data"]
+        
         return schemas.UserInfoResponse(
-            first_name=user.first_name,
-            last_name=user.last_name,
-            email=user.email,
-            user_type=user.user_type,
-            national_id=response["decrypted_data"],
-            dob=user.dob,
-            public_key=user.public_key,
+            first_name=db_user.first_name,
+            last_name=db_user.last_name,
+            email=db_user.email,
+            user_type=db_user.user_type,
+            identity_type=db_user.identity_type,
+            identity_number=identity_response["decrypted_data"],
+            phone_number=phone_number,
+            medical_conditions=medical_conditions,
+            dob=db_user.dob,
+            public_key=db_user.public_key
         )
-    else:
-        return {"message": "User Authentiation Failed"}
+        
+    except Exception as e:
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail=str(e)
+        )
+
+@app.put("/api/user/update", response_model=schemas.UserInfoResponse)
+async def update_user_info(
+    user_update: schemas.UserUpdate,
+    db: Session = Depends(get_db)
+):
+    try:
+        # Current user's information is already verified through the token
+        db_user = auth.get_current_user(token=user_update.token, db=db)
+        
+        # Update basic information
+        db_user.first_name = user_update.first_name
+        db_user.last_name = user_update.last_name
+        db_user.dob = user_update.dob
+        
+        # Update and encrypt identity number if provided
+        if user_update.identity_number:
+            if not validate_identity(user_update.identity_type, user_update.identity_number):
+                raise HTTPException(
+                    status_code=400,
+                    detail=f"Invalid {user_update.identity_type} format"
+                )
+            encrypted_identity = encrypt_with_public_key(
+                db_user.public_key, 
+                user_update.identity_number
+            )
+            db_user.identity_number = encrypted_identity
+            db_user.identity_type = user_update.identity_type
+            
+        # Update and encrypt phone number if provided
+        if user_update.phone_number:
+            encrypted_phone = encrypt_with_public_key(
+                db_user.public_key, 
+                user_update.phone_number
+            )
+            db_user.phone_number = encrypted_phone
+            
+        # Update and encrypt medical conditions if provided
+        if user_update.medical_conditions:
+            medical_conditions_json = json.dumps(user_update.medical_conditions)
+            encrypted_medical_conditions = encrypt_with_public_key(
+                db_user.public_key, 
+                medical_conditions_json
+            )
+            db_user.medical_conditions = encrypted_medical_conditions
+            
+        db.commit()
+        db.refresh(db_user)
+        
+   
+    
+        
+        return schemas.UserInfoResponse(
+            first_name=db_user.first_name,
+            last_name=db_user.last_name,
+            email=db_user.email,
+            user_type=db_user.user_type,
+            identity_type=db_user.identity_type,
+            identity_number=db_user.identity_number,
+            phone_number=db_user.phone_number,
+            medical_conditions=db_user.medical_conditions,
+            dob=db_user.dob,
+            public_key=db_user.public_key
+        )
+        
+    except Exception as e:
+        print(e)
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail=str(e)
+        )
 
 
 @app.post("/api/get-vaccination-history/by-jwt/", response_model=schemas.VaccinationFullHistoryResponse)
@@ -365,6 +502,78 @@ def startup_event():
         seed_vaccine_types(db)
     finally:
         db.close()
+
+
+@app.post("/api/vaccination-stats")
+def get_vaccination_stats(jwt: schemas.TokenInput, db: Session = Depends(get_db)):
+    try:
+        # Verify user and check if they're a healthcare worker (user_type = 2)
+        current_user = auth.get_current_user(token=jwt.token, db=db)
+        if current_user.user_type != 2:
+            raise HTTPException(
+                status_code=status.HTTP_403_FORBIDDEN,
+                detail="Only healthcare workers can access statistics"
+            )
+
+        # Get current year
+        current_year = datetime.now().year
+
+        # Query monthly vaccination counts
+        monthly_stats = (
+            db.query(
+                extract('month', models.VaccinationHistory.vaccination_date).label('month'),
+                func.count().label('count')
+            )
+            .filter(
+                extract('year', models.VaccinationHistory.vaccination_date) == current_year,
+                models.VaccinationHistory.is_taken == True
+            )
+            .group_by(extract('month', models.VaccinationHistory.vaccination_date))
+            .all()
+        )
+
+        # Create a dictionary with all months initialized to 0
+        month_names = ['January', 'February', 'March', 'April', 'May', 'June', 
+                      'July', 'August', 'September', 'October', 'November', 'December']
+        monthly_data = {month: 0 for month in month_names}
+        
+        # Update with actual values
+        for stat in monthly_stats:
+            monthly_data[month_names[stat.month-1]] = stat.count
+
+        # Convert to list format
+        monthly_data = [
+            {"month": month, "vaccinations": count}
+            for month, count in monthly_data.items()
+        ]
+
+        # Query vaccine type distribution
+        vaccine_stats = (
+            db.query(
+                models.VaccinationType.vaccine_name,
+                func.count().label('count')
+            )
+            .join(models.VaccinationHistory)
+            .filter(models.VaccinationHistory.is_taken == True)
+            .group_by(models.VaccinationType.vaccine_name)
+            .all()
+        )
+
+        vaccine_distribution = [
+            {"name": stat.vaccine_name, "value": stat.count}
+            for stat in vaccine_stats
+        ]
+
+        return {
+            "monthly_data": monthly_data,
+            "vaccine_distribution": vaccine_distribution
+        }
+
+    except Exception as e:
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail=str(e)
+        )
 
 
 if __name__ == "__main__":

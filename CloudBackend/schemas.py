@@ -1,16 +1,36 @@
 from pydantic import BaseModel, EmailStr, Field
 from datetime import date
-from typing import Optional, List
+from typing import Optional, List, Dict, Any
+from enum import Enum
+
+class IdentityType(str, Enum):
+    NID = "nid"
+    BRN = "brn"
+    PASSPORT = "passport"
+
+class MedicalCondition(BaseModel):
+    condition_name: str
+    details: str
+    severity: str
+    diagnosed_date: Optional[str]
 
 class UserCreate(BaseModel):
     first_name: str
     last_name: str
     email: EmailStr
     user_type: str
-    national_id: str
-    dob: str  # Could be date field, keeping as string for simplicity
+    identity_type: IdentityType
+    identity_number: str
+    phone_number: Optional[str]
+    medical_conditions: Optional[List[MedicalCondition]]
+    dob: str
     password: str = Field(..., min_length=8)
     
+    class Config:
+        use_enum_values = True
+        
+        
+
 class UserLogin(BaseModel):
     email: EmailStr
     password : str
@@ -30,12 +50,24 @@ class TokenInput(BaseModel):
 class UserInfoResponse(BaseModel):
     first_name: str
     last_name: str
-    email: EmailStr
+    email: str
     user_type: int
-    national_id: str
-    dob: date
+    identity_type: str
+    identity_number: str
+    phone_number: Optional[str] = None
+    medical_conditions: Optional[Any]
     public_key: str
-    
+
+class UserUpdate(BaseModel):
+    first_name: str
+    last_name: str
+    identity_type: Optional[str] = None
+    identity_number: Optional[str] = None
+    phone_number: Optional[str] = None
+    medical_conditions: Optional[Any] = None
+    dob: date
+    token: str  # For decryption
+
 class VaccinationEntryCreate(BaseModel):
     email: EmailStr
     token: str
@@ -65,3 +97,15 @@ class VaccinationFullHistoryResponse(BaseModel):
 class VaccinationHistoryRequest(BaseModel):
     email: EmailStr
     
+class UserInfoUpdate(BaseModel):
+    token: str
+    first_name: str
+    last_name: str
+    email: EmailStr
+    national_id: str
+    dob: date
+    
+    class Config:
+        from_attributes = True
+        
+        

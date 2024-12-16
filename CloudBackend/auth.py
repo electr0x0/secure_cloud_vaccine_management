@@ -42,3 +42,11 @@ def get_current_user(token, db):
         raise HTTPException(
             status_code=status.HTTP_401_UNAUTHORIZED, detail="Invalid token"
         )
+    
+def verify_user_access(current_user: models.User, target_email: str):
+    """Verify if the current user has access to the requested user's data"""
+    if current_user.email != target_email:
+        raise HTTPException(
+            status_code=status.HTTP_403_FORBIDDEN,
+            detail="Not authorized to access this user's information"
+        )

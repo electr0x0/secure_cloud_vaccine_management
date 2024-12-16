@@ -4,9 +4,9 @@ import os
 SECRET_KEY = "secret_key"
 ALGORITHM = "HS256"
 
-DB_USER = "root"
-DB_PASSWORD = "1211"
-DB_SERVER = "192.168.0.134"
+DB_USER = "electro"
+DB_PASSWORD = "1234"
+DB_SERVER = "localhost"
 DB_NAME = "vaccine_key_server"
 
 

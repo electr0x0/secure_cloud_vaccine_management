@@ -1,5 +1,6 @@
 from sqlalchemy import Column, Integer, String, Date, ForeignKey, Boolean, Text, UniqueConstraint
 from sqlalchemy.orm import relationship
+from sqlalchemy.types import JSON
 from database import Base
 
 class User(Base):
@@ -10,10 +11,12 @@ class User(Base):
     last_name = Column(String(50), nullable=False)
     email = Column(String(255), unique=True, index=True, nullable=False)
     user_type = Column(Integer, nullable=False)
-    national_id = Column(Text)
+    identity_type = Column(String(20))  # 'nid', 'brn', or 'passport'
+    identity_number = Column(Text)  # Encrypted
+    phone_number = Column(Text)    # Encrypted
+    medical_conditions = Column(Text)  # Encrypted JSON string
     dob = Column(Date, nullable=False)
     hashed_password = Column(String(255), nullable=False)
-    
     public_key = Column(Text)
 
 class VaccinationType(Base):
