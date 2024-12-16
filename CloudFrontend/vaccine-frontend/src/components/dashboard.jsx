@@ -39,13 +39,21 @@ import { HealthTipsComponent } from "./health-tips";
 import { ReportsComponent } from "./reports";
 import VaccinationRecordComponent from "./vaccinator-input-form";
 import VaccinationDashboard from "./vaccination-dashboard";
-
-import { getCurrentUserVaccineInfo } from "./api"
-
-
+import { getCurrentUserVaccineInfo } from "./api";
+import VaccinationCheck from "./vaccination-check";
 
 export default function Dashboard() {
-  
+  const componentMap = {
+    "vaccination-input-form": VaccinationRecordComponent,
+    "my-vaccinations": VaccinationDashboard,
+    profile: ProfileComponent,
+    reports: ReportsComponent,
+    "health-tips": HealthTipsComponent,
+    faq: Faq,
+    "vaccination-checker": VaccinationCheck,
+    // ... other components
+  };
+
   const [userGroup, setUserGroup] = useState(null);
   const [isExpanded, setIsExpanded] = useState(false);
   const [isPinned, setIsPinned] = useState(false);
@@ -54,23 +62,18 @@ export default function Dashboard() {
 
   useEffect(() => {
     const storedUserGroup = sessionStorage.getItem("userGroup");
+
+    if (storedUserGroup === "1") {
+      setActiveComponent("my-vaccinations");
+    } else if (storedUserGroup === "2") {
+      setActiveComponent("vaccination-input-form");
+    }
     if (!storedUserGroup) {
       router.push("/login");
     } else {
       setUserGroup(storedUserGroup);
     }
   }, [router]);
-
-
-  const componentMap = {
-    profile: ProfileComponent,
-    reports: ReportsComponent,
-    "vaccination-input-form": VaccinationRecordComponent,
-    "my-vaccinations": VaccinationDashboard,
-    "health-tips": HealthTipsComponent,
-    faq: Faq,
-    // ... other components
-  };
 
   const handleLogout = () => {
     sessionStorage.clear();
@@ -178,7 +181,11 @@ export default function Dashboard() {
       <main className="flex-1 p-8 overflow-auto relative">
         <div className="flex justify-between items-center mb-6">
           <h1 className="text-2xl font-bold">
-            Welcome, {sessionStorage.getItem('userName') ? sessionStorage.getItem('userName') : 'Guest'}!
+            Welcome,{" "}
+            {sessionStorage.getItem("userName")
+              ? sessionStorage.getItem("userName")
+              : "Guest"}
+            !
           </h1>
           <Button variant="ghost" size="icon" className="relative">
             <Bell className="h-6 w-6" />

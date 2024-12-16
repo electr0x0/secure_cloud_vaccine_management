@@ -1,11 +1,5 @@
 [
   {
-    "label": "Profile",
-    "icon": "UserCircle",
-    "user_group": "all",
-    "component" : "profile"
-  },
-  {
     "label": "Record Vaccination",
     "icon": "FileText",
     "user_group": "2",
@@ -16,6 +10,18 @@
     "icon": "Syringe",
     "user_group": "1",
     "component" : "my-vaccinations"
+  },
+  {
+    "label" : "View Vaccination Records",
+    "icon" : "FileText",
+    "user_group" : "2",
+    "component" : "vaccination-checker"
+  },
+  {
+    "label": "Profile",
+    "icon": "UserCircle",
+    "user_group": "all",
+    "component" : "profile"
   },
   {
     "label": "Reports",
