@@ -578,4 +578,4 @@ def get_vaccination_stats(jwt: schemas.TokenInput, db: Session = Depends(get_db)
 
 
 if __name__ == "__main__":
-    uvicorn.run("main:app", host=config.SERVER_HOST, port=config.SERVER_PORT, reload=True)
+    uvicorn.run("main:app", host=config.SERVER_HOST, port=int(config.SERVER_PORT), reload=True)
