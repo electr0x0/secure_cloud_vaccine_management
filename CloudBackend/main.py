@@ -13,14 +13,15 @@ from sqlalchemy import and_, func, extract
 from typing import List
 from utils import validate_identity
 from datetime import datetime
-
+import os
 import requests
 import json
+import config
 
 app = FastAPI()
 
 origins = [
-    "http://localhost:3000",
+    config.FRONTEND_URL
 ]
 
 app.add_middleware(
@@ -577,4 +578,4 @@ def get_vaccination_stats(jwt: schemas.TokenInput, db: Session = Depends(get_db)
 
 
 if __name__ == "__main__":
-    uvicorn.run("main:app", host="127.0.0.1", port=8000, reload=True)
+    uvicorn.run("main:app", host=config.SERVER_HOST, port=config.SERVER_PORT, reload=True)

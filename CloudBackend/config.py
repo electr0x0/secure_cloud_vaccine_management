@@ -16,4 +16,12 @@ DB_PASSWORD = os.getenv("DB_PASSWORD")
 DB_SERVER = os.getenv("DB_SERVER")
 DB_NAME = os.getenv("DB_NAME")
 
+SERVER_HOST = os.getenv("SERVER_HOST")
+SERVER_PORT = os.getenv("SERVER_PORT")
+FRONTEND_URL = os.getenv("FRONTEND_URL")
+
+print(f"SERVER_HOST: {SERVER_HOST}")
+print(f"SERVER_PORT: {SERVER_PORT}")
+print(f"FRONTEND_URL: {FRONTEND_URL}")
+
 SQLALCHEMY_DATABASE_URL = f"mysql+mysqlconnector://{DB_USER}:{DB_PASSWORD}@{DB_SERVER}/{DB_NAME}"
