@@ -578,4 +578,32 @@ def get_vaccination_stats(jwt: schemas.TokenInput, db: Session = Depends(get_db)
 
 
 if __name__ == "__main__":
-    uvicorn.run("main:app", host=config.SERVER_HOST, port=int(config.SERVER_PORT), reload=True)
+    env = config.ENVIRONMENT
+    
+    # Common settings
+    config_dict = {
+        "host": config.SERVER_HOST,
+        "port": int(config.SERVER_PORT),
+        "access_log": True
+    }
+    
+    if env == "production":
+        # Production settings
+        config_dict.update({
+            "reload": False,
+            "workers": 4,
+            "proxy_headers": True,
+            "forwarded_allow_ips": '*'
+        })
+        # Disable Swagger UI and ReDoc in production
+        app.docs_url = None
+        app.redoc_url = None
+    else:
+        # Development settings 
+        config_dict.update({
+            "reload": True,
+            "workers": 1,
+            "proxy_headers": False
+        })
+
+    uvicorn.run("main:app", **config_dict)
