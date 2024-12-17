@@ -36,11 +36,13 @@ export function ProfileComponent() {
     public_key: ""
   });
 
+  const API = process.env.NEXT_PUBLIC_API_URL
+
   useEffect(() => {
     const fetchProfile = async () => {
       try {
         const response = await axios.get(
-          "http://localhost:8000/api/user/info",
+          `${API}/api/user/info`,
           {
             params: { token: sessionStorage.access_token }
           }
@@ -133,7 +135,7 @@ export function ProfileComponent() {
       };
 
       const response = await axios.put(
-        "http://localhost:8000/api/user/update",
+        `${API}/api/user/update`,
         updateData
       );
 

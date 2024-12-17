@@ -3,7 +3,7 @@
 import axios from 'axios';
 
 
-const API = "http://localhost:8000"
+const API = process.env.NEXT_PUBLIC_API_URL
 
 export async function registerUser(formValues) {
   try {

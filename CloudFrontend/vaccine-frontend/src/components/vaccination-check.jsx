@@ -20,8 +20,10 @@ export default function VaccinationCheck() {
     setIsLoading(true)
     const email = event.target.email.value
 
+    const API = process.env.NEXT_PUBLIC_API_URL
+
     try {
-      const response = await axios.get(`http://localhost:8000/api/vaccination-history?email=${email}`)
+      const response = await axios.get(`${API}/api/vaccination-history?email=${email}`)
       setVaccinationData(response.data)
       toast({
         title: "Success",

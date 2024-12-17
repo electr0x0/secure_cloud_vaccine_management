@@ -63,13 +63,15 @@ export function ReportsComponent() {
     return () => setChartsMounted(false);
   }, []);
 
+  const API = process.env.NEXT_PUBLIC_API_URL
+
   useEffect(() => {
     const fetchStats = async () => {
       try {
         setLoading(true);
         const token = sessionStorage.getItem("access_token");
         const response = await axios.post(
-          "http://localhost:8000/api/vaccination-stats",
+          `${API}/api/vaccination-stats`,
           {
             token: token,
           }
