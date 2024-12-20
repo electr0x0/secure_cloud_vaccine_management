@@ -18,18 +18,44 @@ import requests
 import json
 import config
 from prometheus_fastapi_instrumentator import Instrumentator
-from prometheus_client import Counter, Histogram, Gauge
+from prometheus_client import Counter, Histogram, Gauge, CollectorRegistry
 from functools import wraps
 import time
+from fastapi.responses import Response
+import prometheus_client
+
+# Create a custom registry
+REGISTRY = CollectorRegistry()
+
+# Initialize metrics with the custom registry
+encryption_duration = Histogram(
+    'encryption_duration_seconds', 
+    'Time spent encrypting data',
+    registry=REGISTRY
+)
+
+encryption_requests = Counter(
+    'encryption_requests_total', 
+    'Total encryption requests', 
+    ['status'],
+    registry=REGISTRY
+)
+
+key_server_latency = Histogram(
+    'key_server_latency_seconds', 
+    'Key server response time',
+    registry=REGISTRY
+)
 
 app = FastAPI()
 
-Instrumentator().instrument(app).expose(app)
-
-# Add custom metrics
-encryption_duration = Histogram('encryption_duration_seconds', 'Time spent encrypting data')
-encryption_requests = Counter('encryption_requests_total', 'Total encryption requests', ['status'])
-key_server_latency = Histogram('key_server_latency_seconds', 'Key server response time')
+# Expose metrics using the custom registry
+@app.get("/metrics")
+async def metrics():
+    return Response(
+        prometheus_client.generate_latest(REGISTRY),
+        media_type="text/plain"
+    )
 
 origins = [
     config.FRONTEND_URL
