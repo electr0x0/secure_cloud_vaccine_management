@@ -1,6 +1,6 @@
 # main.tf
 provider "aws" {
-  region = "ap-southeast-1"
+  region = "ap-southeast-1" # Found Singapore most suitable for lower latency
 }
 
 # VPC
@@ -139,13 +139,13 @@ resource "aws_security_group" "mariadb" {
     security_groups = [aws_security_group.backend.id]
   }
 
-  # Temporary internet access for installation
-  egress {
-    from_port   = 0
-    to_port     = 0
-    protocol    = "-1"
-    cidr_blocks = ["0.0.0.0/0"]
-  }
+  # Temporary internet access for installation of mariadb as I couldn't find a suitable AMI with mariadb pre-installed (TODO: remove after setup is done)
+  #egress {
+  #  from_port   = 0
+  #  to_port     = 0
+  #  protocol    = "-1"
+  #  cidr_blocks = ["0.0.0.0/0"]
+  #}
 }
 
 # EC2 Instances
@@ -189,7 +189,8 @@ resource "aws_instance" "mariadb" {
   vpc_security_group_ids = [aws_security_group.mariadb.id]
   
   associate_public_ip_address = false
-  
+
+  # Startup script to install mariadb although it didnt work as expected
   user_data = <<-EOF
               #!/bin/bash
               # Update package list
@@ -223,7 +224,7 @@ resource "aws_instance" "mariadb" {
   }
 }
 
-# NAT Gateway (for private subnet internet access during setup)
+# NAT Gateway (for private subnet internet access during setup will remove after setup)
 resource "aws_eip" "nat" {
   domain = "vpc"
 }
@@ -241,10 +242,10 @@ resource "aws_nat_gateway" "main" {
 resource "aws_route_table" "private" {
   vpc_id = aws_vpc.vaccine_vpc.id
 
-  route {
-    cidr_block     = "0.0.0.0/0"
-    nat_gateway_id = aws_nat_gateway.main.id
-  }
+  #route {
+  #  cidr_block     = "0.0.0.0/0"
+  #  nat_gateway_id = aws_nat_gateway.main.id # TODO: remove after setup is done
+  #}
 
   tags = {
     Name = "private-rt"
@@ -255,4 +256,109 @@ resource "aws_route_table" "private" {
 resource "aws_route_table_association" "private" {
   subnet_id      = aws_subnet.private.id
   route_table_id = aws_route_table.private.id
+}
+
+# Security Group for Grafana
+resource "aws_security_group" "grafana" {
+  name        = "cloud-vaccine-grafana-sg"
+  description = "Security group for Grafana monitoring"
+  vpc_id      = aws_vpc.vaccine_vpc.id
+
+  # Grafana Web Interface
+  ingress {
+    from_port   = 3000
+    to_port     = 3000
+    protocol    = "tcp"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+
+  # SSH Access
+  ingress {
+    from_port   = 22
+    to_port     = 22
+    protocol    = "tcp"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+
+  # Allow Prometheus to scrape metrics from backend and database
+  egress {
+    from_port   = 0
+    to_port     = 0
+    protocol    = "-1"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+
+  tags = {
+    Name = "grafana-sg"
+  }
+}
+
+# Grafana EC2 Instance
+resource "aws_instance" "grafana" {
+  ami           = "ami-06650ca7ed78ff6fa" # Ubuntu 22.04 LTS
+  instance_type = "t2.micro"
+  subnet_id     = aws_subnet.public.id
+  key_name      = var.key_name
+
+  associate_public_ip_address = true
+  
+  vpc_security_group_ids = [aws_security_group.grafana.id]
+
+  root_block_device {
+    volume_size = 20  # Larger volume for metrics storage
+  }
+  
+  tags = {
+    Name = "vaccine-monitoring"
+  }
+
+  # User data script to install Grafana and Prometheus
+  user_data = <<-EOF
+              #!/bin/bash
+              # Update and install required packages
+              apt-get update
+              apt-get install -y apt-transport-https software-properties-common
+
+              # Add Grafana repository
+              wget -q -O /usr/share/keyrings/grafana.key https://apt.grafana.com/gpg.key
+              echo "deb [signed-by=/usr/share/keyrings/grafana.key] https://apt.grafana.com stable main" | tee -a /etc/apt/sources.list.d/grafana.list
+
+              # Install Grafana
+              apt-get update
+              apt-get install -y grafana
+
+              # Install Prometheus
+              apt-get install -y prometheus
+
+              # Start and enable services
+              systemctl enable grafana-server
+              systemctl start grafana-server
+              systemctl enable prometheus
+              systemctl start prometheus
+
+              # Install Node Exporter
+              apt-get install -y prometheus-node-exporter
+              systemctl enable prometheus-node-exporter
+              systemctl start prometheus-node-exporter
+              EOF
+}
+
+# Allow MariaDB security group to accept connections from Grafana
+resource "aws_security_group_rule" "mariadb_monitoring" {
+  type                     = "ingress"
+  from_port               = 9104  # MySQL Exporter port
+  to_port                 = 9104
+  protocol                = "tcp"
+  source_security_group_id = aws_security_group.grafana.id
+  security_group_id       = aws_security_group.mariadb.id
+}
+
+# Allow Backend security group to accept connections from Grafana
+resource "aws_security_group_rule" "backend_monitoring" {
+  type                     = "ingress"
+  from_port               = 8000  # FastAPI metrics endpoint
+  to_port                 = 8000
+  protocol                = "tcp"
+  source_security_group_id = aws_security_group.grafana.id
+  security_group_id       = aws_security_group.backend.id
 }

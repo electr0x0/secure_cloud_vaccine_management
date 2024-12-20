@@ -17,8 +17,11 @@ import os
 import requests
 import json
 import config
+from prometheus_fastapi_instrumentator import Instrumentator
 
 app = FastAPI()
+
+Instrumentator().instrument(app).expose(app)
 
 origins = [
     config.FRONTEND_URL
