@@ -18,10 +18,18 @@ import requests
 import json
 import config
 from prometheus_fastapi_instrumentator import Instrumentator
+from prometheus_client import Counter, Histogram, Gauge
+from functools import wraps
+import time
 
 app = FastAPI()
 
 Instrumentator().instrument(app).expose(app)
+
+# Add custom metrics
+encryption_duration = Histogram('encryption_duration_seconds', 'Time spent encrypting data')
+encryption_requests = Counter('encryption_requests_total', 'Total encryption requests', ['status'])
+key_server_latency = Histogram('key_server_latency_seconds', 'Key server response time')
 
 origins = [
     config.FRONTEND_URL
@@ -578,6 +586,65 @@ def get_vaccination_stats(jwt: schemas.TokenInput, db: Session = Depends(get_db)
             status_code=status.HTTP_400_BAD_REQUEST,
             detail=str(e)
         )
+
+
+def measure_time(metric):
+    def decorator(func):
+        @wraps(func)
+        async def wrapper(*args, **kwargs):
+            start_time = time.time()
+            try:
+                result = await func(*args, **kwargs)
+                duration = time.time() - start_time
+                metric.observe(duration)
+                return result
+            except Exception as e:
+                duration = time.time() - start_time
+                metric.observe(duration)
+                raise e
+        return wrapper
+    return decorator
+
+
+async def measure_key_server_request(func):
+    start_time = time.time()
+    try:
+        response = await func
+        duration = time.time() - start_time
+        key_server_latency.observe(duration)
+        return response
+    except Exception as e:
+        duration = time.time() - start_time
+        key_server_latency.observe(duration)
+        raise e
+
+
+@app.post("/api/encrypt")
+@measure_time(encryption_duration)
+async def encrypt_data(data: schemas.EncryptionRequest, db: Session = Depends(get_db)):
+    try:
+        # Your existing encryption logic
+        encrypted_data = encrypt_with_public_key(data.data)
+        encryption_requests.labels(status="success").inc()
+        return {"encrypted_data": encrypted_data}
+    except Exception as e:
+        encryption_requests.labels(status="error").inc()
+        raise HTTPException(status_code=500, detail=str(e))
+
+
+async def request_key_server(endpoint, method="GET", data=None):
+    try:
+        if method == "GET":
+            response = await measure_key_server_request(
+                requests.get(f"{KEYSERVER}/{endpoint}")
+            )
+        else:
+            response = await measure_key_server_request(
+                requests.post(f"{KEYSERVER}/{endpoint}", json=data)
+            )
+        return response
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Key server error: {str(e)}")
 
 
 if __name__ == "__main__":
