@@ -119,34 +119,42 @@ async def register(user: schemas.UserCreate, db: Session = Depends(get_db)):
             )
 
         # Generate key pair from private key server
+        start_time = time.time()
         try:
             key_response = requests.post(
                 f"{KEYSERVER}/generate-key-pair",
                 params={"user_email": user.email}
             )
+            key_server_latency.observe(time.time() - start_time)
+            
             if key_response.status_code != 200:
+                encryption_requests.labels(status="error").inc()
                 raise HTTPException(
                     status_code=500,
                     detail="Failed to generate encryption keys"
                 )
             public_key = key_response.json()["encoded_public_key"]
+            encryption_requests.labels(status="success").inc()
         except Exception as e:
+            encryption_requests.labels(status="error").inc()
             raise HTTPException(
                 status_code=500,
                 detail="Key server communication failed"
             )
 
         # Now encrypt sensitive data with the received public key
+        start_encrypt = time.time()
         encrypted_identity = encrypt_with_public_key(public_key, user.identity_number)
         encrypted_phone = encrypt_with_public_key(public_key, user.phone_number) if user.phone_number else None
-
+        
         # Encrypt medical conditions if they exist
         encrypted_medical_conditions = None
         if user.medical_conditions:
             medical_conditions_json = [condition.dict() for condition in user.medical_conditions]
-            # Convert to string for encryption
             medical_conditions_str = json.dumps(medical_conditions_json)
             encrypted_medical_conditions = encrypt_with_public_key(public_key, medical_conditions_str)
+        
+        encryption_duration.observe(time.time() - start_encrypt)
 
         # Create user with encrypted data
         db_user = models.User(
@@ -157,7 +165,7 @@ async def register(user: schemas.UserCreate, db: Session = Depends(get_db)):
             identity_type=user.identity_type,
             identity_number=encrypted_identity,
             phone_number=encrypted_phone,
-            medical_conditions=encrypted_medical_conditions,  # Store encrypted medical conditions
+            medical_conditions=encrypted_medical_conditions,
             dob=user.dob,
             hashed_password=auth.get_password_hash(user.password),
             public_key=public_key
@@ -207,22 +215,29 @@ async def get_user_info(
         db_user = auth.get_current_user(token=token, db=db)
 
         # Decrypt sensitive information
+        start_time = time.time()
+        
+        # Decrypt identity number
         json = {"data": db_user.identity_number, "token": token}
-        identity_response = requests.post(url=f"{KEYSERVER}/decrypt-data", json=json).json()
+        identity_response = requests.post(url=f"{KEYSERVER}/decrypt-data", json=json)
         
         # Decrypt phone number if exists
         phone_number = None
         if db_user.phone_number:
             json = {"data": db_user.phone_number, "token": token}
-            phone_response = requests.post(url=f"{KEYSERVER}/decrypt-data", json=json).json()
-            phone_number = phone_response["decrypted_data"]
+            phone_response = requests.post(url=f"{KEYSERVER}/decrypt-data", json=json)
+            phone_number = phone_response.json()["decrypted_data"]
         
         # Decrypt medical conditions if exists
         medical_conditions = []
         if db_user.medical_conditions:
             json = {"data": db_user.medical_conditions, "token": token}
-            medical_response = requests.post(url=f"{KEYSERVER}/decrypt-data", json=json).json()
-            medical_conditions = medical_response["decrypted_data"]
+            medical_response = requests.post(url=f"{KEYSERVER}/decrypt-data", json=json)
+            medical_conditions = medical_response.json()["decrypted_data"]
+        
+        # Record total decryption time
+        key_server_latency.observe(time.time() - start_time)
+        encryption_requests.labels(status="success").inc()
         
         return schemas.UserInfoResponse(
             first_name=db_user.first_name,
@@ -230,7 +245,7 @@ async def get_user_info(
             email=db_user.email,
             user_type=db_user.user_type,
             identity_type=db_user.identity_type,
-            identity_number=identity_response["decrypted_data"],
+            identity_number=identity_response.json()["decrypted_data"],
             phone_number=phone_number,
             medical_conditions=medical_conditions,
             dob=db_user.dob,
@@ -238,6 +253,7 @@ async def get_user_info(
         )
         
     except Exception as e:
+        encryption_requests.labels(status="error").inc()
         raise HTTPException(
             status_code=status.HTTP_400_BAD_REQUEST,
             detail=str(e)
@@ -587,64 +603,6 @@ def get_vaccination_stats(jwt: schemas.TokenInput, db: Session = Depends(get_db)
             detail=str(e)
         )
 
-
-def measure_time(metric):
-    def decorator(func):
-        @wraps(func)
-        async def wrapper(*args, **kwargs):
-            start_time = time.time()
-            try:
-                result = await func(*args, **kwargs)
-                duration = time.time() - start_time
-                metric.observe(duration)
-                return result
-            except Exception as e:
-                duration = time.time() - start_time
-                metric.observe(duration)
-                raise e
-        return wrapper
-    return decorator
-
-
-async def measure_key_server_request(func):
-    start_time = time.time()
-    try:
-        response = await func
-        duration = time.time() - start_time
-        key_server_latency.observe(duration)
-        return response
-    except Exception as e:
-        duration = time.time() - start_time
-        key_server_latency.observe(duration)
-        raise e
-
-
-@app.post("/api/encrypt")
-@measure_time(encryption_duration)
-async def encrypt_data(data: schemas.EncryptionRequest, db: Session = Depends(get_db)):
-    try:
-        # Your existing encryption logic
-        encrypted_data = encrypt_with_public_key(data.data)
-        encryption_requests.labels(status="success").inc()
-        return {"encrypted_data": encrypted_data}
-    except Exception as e:
-        encryption_requests.labels(status="error").inc()
-        raise HTTPException(status_code=500, detail=str(e))
-
-
-async def request_key_server(endpoint, method="GET", data=None):
-    try:
-        if method == "GET":
-            response = await measure_key_server_request(
-                requests.get(f"{KEYSERVER}/{endpoint}")
-            )
-        else:
-            response = await measure_key_server_request(
-                requests.post(f"{KEYSERVER}/{endpoint}", json=data)
-            )
-        return response
-    except Exception as e:
-        raise HTTPException(status_code=500, detail=f"Key server error: {str(e)}")
 
 
 if __name__ == "__main__":
