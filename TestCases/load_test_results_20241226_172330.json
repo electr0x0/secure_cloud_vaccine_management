@@ -1,0 +1,719 @@
+{
+  "test_config": {
+    "num_requests": 100,
+    "concurrent_requests": 10,
+    "base_url": "http://54.169.205.32:8000"
+  },
+  "summary": {
+    "total_duration": 21.070343732833862,
+    "successful_requests": 100,
+    "failed_requests": 0,
+    "requests_per_second": 4.746007054653326,
+    "avg_duration": 2.029615979194641,
+    "median_duration": 2.0920584201812744,
+    "min_duration": 0.6625163555145264,
+    "max_duration": 4.132007360458374
+  },
+  "detailed_results": [
+    {
+      "success": true,
+      "duration": 3.0434913635253906,
+      "status_code": 200,
+      "email": "yurjfuaw@test.com",
+      "response": "{\"message\":\"User registered successfully\"}"
+    },
+    {
+      "success": true,
+      "duration": 4.131689548492432,
+      "status_code": 200,
+      "email": "bendevzx@test.com",
+      "response": "{\"message\":\"User registered successfully\"}"
+    },
+    {
+      "success": true,
+      "duration": 3.0434112548828125,
+      "status_code": 200,
+      "email": "pllrtans@test.com",
+      "response": "{\"message\":\"User registered successfully\"}"
+    },
+    {
+      "success": true,
+      "duration": 4.132007360458374,
+      "status_code": 200,
+      "email": "ngactjap@test.com",
+      "response": "{\"message\":\"User registered successfully\"}"
+    },
+    {
+      "success": true,
+      "duration": 4.131110668182373,
+      "status_code": 200,
+      "email": "yyhffppg@test.com",
+      "response": "{\"message\":\"User registered successfully\"}"
+    },
+    {
+      "success": true,
+      "duration": 4.130542039871216,
+      "status_code": 200,
+      "email": "xmzfbywp@test.com",
+      "response": "{\"message\":\"User registered successfully\"}"
+    },
+    {
+      "success": true,
+      "duration": 3.0399584770202637,
+      "status_code": 200,
+      "email": "sguoryya@test.com",
+      "response": "{\"message\":\"User registered successfully\"}"
+    },
+    {
+      "success": true,
+      "duration": 4.127467155456543,
+      "status_code": 200,
+      "email": "dvamljnx@test.com",
+      "response": "{\"message\":\"User registered successfully\"}"
+    },
+    {
+      "success": true,
+      "duration": 3.0379159450531006,
+      "status_code": 200,
+      "email": "jllujzym@test.com",
+      "response": "{\"message\":\"User registered successfully\"}"
+    },
+    {
+      "success": true,
+      "duration": 4.125169038772583,
+      "status_code": 200,
+      "email": "rytzyfzg@test.com",
+      "response": "{\"message\":\"User registered successfully\"}"
+    },
+    {
+      "success": true,
+      "duration": 1.5074670314788818,
+      "status_code": 200,
+      "email": "hzzdykot@test.com",
+      "response": "{\"message\":\"User registered successfully\"}"
+    },
+    {
+      "success": true,
+      "duration": 1.6551485061645508,
+      "status_code": 200,
+      "email": "tgtjvsik@test.com",
+      "response": "{\"message\":\"User registered successfully\"}"
+    },
+    {
+      "success": true,
+      "duration": 1.654719591140747,
+      "status_code": 200,
+      "email": "jdeprvzr@test.com",
+      "response": "{\"message\":\"User registered successfully\"}"
+    },
+    {
+      "success": true,
+      "duration": 1.507354974746704,
+      "status_code": 200,
+      "email": "oadfcwcw@test.com",
+      "response": "{\"message\":\"User registered successfully\"}"
+    },
+    {
+      "success": true,
+      "duration": 2.2054672241210938,
+      "status_code": 200,
+      "email": "hzkubfvq@test.com",
+      "response": "{\"message\":\"User registered successfully\"}"
+    },
+    {
+      "success": true,
+      "duration": 2.2050797939300537,
+      "status_code": 200,
+      "email": "ybdzfljw@test.com",
+      "response": "{\"message\":\"User registered successfully\"}"
+    },
+    {
+      "success": true,
+      "duration": 2.204749345779419,
+      "status_code": 200,
+      "email": "vkjjdumd@test.com",
+      "response": "{\"message\":\"User registered successfully\"}"
+    },
+    {
+      "success": true,
+      "duration": 2.293062448501587,
+      "status_code": 200,
+      "email": "wrsegzcf@test.com",
+      "response": "{\"message\":\"User registered successfully\"}"
+    },
+    {
+      "success": true,
+      "duration": 2.293355703353882,
+      "status_code": 200,
+      "email": "ylqypeba@test.com",
+      "response": "{\"message\":\"User registered successfully\"}"
+    },
+    {
+      "success": true,
+      "duration": 2.2926688194274902,
+      "status_code": 200,
+      "email": "wgvqicpg@test.com",
+      "response": "{\"message\":\"User registered successfully\"}"
+    },
+    {
+      "success": true,
+      "duration": 1.5402474403381348,
+      "status_code": 200,
+      "email": "rjmpjjtc@test.com",
+      "response": "{\"message\":\"User registered successfully\"}"
+    },
+    {
+      "success": true,
+      "duration": 1.542097568511963,
+      "status_code": 200,
+      "email": "tzagvbkq@test.com",
+      "response": "{\"message\":\"User registered successfully\"}"
+    },
+    {
+      "success": true,
+      "duration": 1.5619540214538574,
+      "status_code": 200,
+      "email": "pughmcxn@test.com",
+      "response": "{\"message\":\"User registered successfully\"}"
+    },
+    {
+      "success": true,
+      "duration": 1.5613586902618408,
+      "status_code": 200,
+      "email": "cqezosvy@test.com",
+      "response": "{\"message\":\"User registered successfully\"}"
+    },
+    {
+      "success": true,
+      "duration": 1.9504082202911377,
+      "status_code": 200,
+      "email": "znbtickz@test.com",
+      "response": "{\"message\":\"User registered successfully\"}"
+    },
+    {
+      "success": true,
+      "duration": 2.761631965637207,
+      "status_code": 200,
+      "email": "fccicslp@test.com",
+      "response": "{\"message\":\"User registered successfully\"}"
+    },
+    {
+      "success": true,
+      "duration": 1.2549464702606201,
+      "status_code": 200,
+      "email": "szvleyow@test.com",
+      "response": "{\"message\":\"User registered successfully\"}"
+    },
+    {
+      "success": true,
+      "duration": 1.255072832107544,
+      "status_code": 200,
+      "email": "ihqnxtlg@test.com",
+      "response": "{\"message\":\"User registered successfully\"}"
+    },
+    {
+      "success": true,
+      "duration": 2.477651596069336,
+      "status_code": 200,
+      "email": "vkylrkey@test.com",
+      "response": "{\"message\":\"User registered successfully\"}"
+    },
+    {
+      "success": true,
+      "duration": 2.4836158752441406,
+      "status_code": 200,
+      "email": "pdlkxwhu@test.com",
+      "response": "{\"message\":\"User registered successfully\"}"
+    },
+    {
+      "success": true,
+      "duration": 2.483931064605713,
+      "status_code": 200,
+      "email": "fmxhamsr@test.com",
+      "response": "{\"message\":\"User registered successfully\"}"
+    },
+    {
+      "success": true,
+      "duration": 2.430177688598633,
+      "status_code": 200,
+      "email": "spmcbjcm@test.com",
+      "response": "{\"message\":\"User registered successfully\"}"
+    },
+    {
+      "success": true,
+      "duration": 1.4607744216918945,
+      "status_code": 200,
+      "email": "qnnsvbqs@test.com",
+      "response": "{\"message\":\"User registered successfully\"}"
+    },
+    {
+      "success": true,
+      "duration": 1.4646871089935303,
+      "status_code": 200,
+      "email": "sjlkzree@test.com",
+      "response": "{\"message\":\"User registered successfully\"}"
+    },
+    {
+      "success": true,
+      "duration": 2.0045125484466553,
+      "status_code": 200,
+      "email": "twdxhmvz@test.com",
+      "response": "{\"message\":\"User registered successfully\"}"
+    },
+    {
+      "success": true,
+      "duration": 2.003911256790161,
+      "status_code": 200,
+      "email": "dnsbvazo@test.com",
+      "response": "{\"message\":\"User registered successfully\"}"
+    },
+    {
+      "success": true,
+      "duration": 0.6625163555145264,
+      "status_code": 200,
+      "email": "gyrloywe@test.com",
+      "response": "{\"message\":\"User registered successfully\"}"
+    },
+    {
+      "success": true,
+      "duration": 0.9649615287780762,
+      "status_code": 200,
+      "email": "llagkqjc@test.com",
+      "response": "{\"message\":\"User registered successfully\"}"
+    },
+    {
+      "success": true,
+      "duration": 1.4799861907958984,
+      "status_code": 200,
+      "email": "uqccrgrv@test.com",
+      "response": "{\"message\":\"User registered successfully\"}"
+    },
+    {
+      "success": true,
+      "duration": 2.397552251815796,
+      "status_code": 200,
+      "email": "zvsxntmw@test.com",
+      "response": "{\"message\":\"User registered successfully\"}"
+    },
+    {
+      "success": true,
+      "duration": 0.8211851119995117,
+      "status_code": 200,
+      "email": "kwzvdirh@test.com",
+      "response": "{\"message\":\"User registered successfully\"}"
+    },
+    {
+      "success": true,
+      "duration": 1.1402812004089355,
+      "status_code": 200,
+      "email": "rykrdrqk@test.com",
+      "response": "{\"message\":\"User registered successfully\"}"
+    },
+    {
+      "success": true,
+      "duration": 1.1409878730773926,
+      "status_code": 200,
+      "email": "tbqvvjrv@test.com",
+      "response": "{\"message\":\"User registered successfully\"}"
+    },
+    {
+      "success": true,
+      "duration": 2.093050479888916,
+      "status_code": 200,
+      "email": "zbytbhif@test.com",
+      "response": "{\"message\":\"User registered successfully\"}"
+    },
+    {
+      "success": true,
+      "duration": 2.0952913761138916,
+      "status_code": 200,
+      "email": "wqlahljv@test.com",
+      "response": "{\"message\":\"User registered successfully\"}"
+    },
+    {
+      "success": true,
+      "duration": 2.091066360473633,
+      "status_code": 200,
+      "email": "oiqwvrea@test.com",
+      "response": "{\"message\":\"User registered successfully\"}"
+    },
+    {
+      "success": true,
+      "duration": 1.836524248123169,
+      "status_code": 200,
+      "email": "hbpbqoae@test.com",
+      "response": "{\"message\":\"User registered successfully\"}"
+    },
+    {
+      "success": true,
+      "duration": 1.837312936782837,
+      "status_code": 200,
+      "email": "yfvlryqk@test.com",
+      "response": "{\"message\":\"User registered successfully\"}"
+    },
+    {
+      "success": true,
+      "duration": 1.836329698562622,
+      "status_code": 200,
+      "email": "rnlhxtfg@test.com",
+      "response": "{\"message\":\"User registered successfully\"}"
+    },
+    {
+      "success": true,
+      "duration": 0.7471494674682617,
+      "status_code": 200,
+      "email": "rjuapqwm@test.com",
+      "response": "{\"message\":\"User registered successfully\"}"
+    },
+    {
+      "success": true,
+      "duration": 1.3194429874420166,
+      "status_code": 200,
+      "email": "xfneozzf@test.com",
+      "response": "{\"message\":\"User registered successfully\"}"
+    },
+    {
+      "success": true,
+      "duration": 1.3198442459106445,
+      "status_code": 200,
+      "email": "wetyyhme@test.com",
+      "response": "{\"message\":\"User registered successfully\"}"
+    },
+    {
+      "success": true,
+      "duration": 0.7953712940216064,
+      "status_code": 200,
+      "email": "ieeblyvm@test.com",
+      "response": "{\"message\":\"User registered successfully\"}"
+    },
+    {
+      "success": true,
+      "duration": 2.4583122730255127,
+      "status_code": 200,
+      "email": "cqurgvrd@test.com",
+      "response": "{\"message\":\"User registered successfully\"}"
+    },
+    {
+      "success": true,
+      "duration": 2.457498073577881,
+      "status_code": 200,
+      "email": "gjdsnmac@test.com",
+      "response": "{\"message\":\"User registered successfully\"}"
+    },
+    {
+      "success": true,
+      "duration": 2.456411123275757,
+      "status_code": 200,
+      "email": "xkokynrr@test.com",
+      "response": "{\"message\":\"User registered successfully\"}"
+    },
+    {
+      "success": true,
+      "duration": 2.4557507038116455,
+      "status_code": 200,
+      "email": "vpkaaqjf@test.com",
+      "response": "{\"message\":\"User registered successfully\"}"
+    },
+    {
+      "success": true,
+      "duration": 2.427002191543579,
+      "status_code": 200,
+      "email": "duodfctw@test.com",
+      "response": "{\"message\":\"User registered successfully\"}"
+    },
+    {
+      "success": true,
+      "duration": 0.8976535797119141,
+      "status_code": 200,
+      "email": "ycndnibd@test.com",
+      "response": "{\"message\":\"User registered successfully\"}"
+    },
+    {
+      "success": true,
+      "duration": 0.8723618984222412,
+      "status_code": 200,
+      "email": "eyxzxswv@test.com",
+      "response": "{\"message\":\"User registered successfully\"}"
+    },
+    {
+      "success": true,
+      "duration": 2.2539803981781006,
+      "status_code": 200,
+      "email": "qknfgwxr@test.com",
+      "response": "{\"message\":\"User registered successfully\"}"
+    },
+    {
+      "success": true,
+      "duration": 2.2523903846740723,
+      "status_code": 200,
+      "email": "simmunia@test.com",
+      "response": "{\"message\":\"User registered successfully\"}"
+    },
+    {
+      "success": true,
+      "duration": 2.2508890628814697,
+      "status_code": 200,
+      "email": "rrmykxdw@test.com",
+      "response": "{\"message\":\"User registered successfully\"}"
+    },
+    {
+      "success": true,
+      "duration": 0.902864933013916,
+      "status_code": 200,
+      "email": "kmsgtfig@test.com",
+      "response": "{\"message\":\"User registered successfully\"}"
+    },
+    {
+      "success": true,
+      "duration": 0.9544723033905029,
+      "status_code": 200,
+      "email": "gvukkqng@test.com",
+      "response": "{\"message\":\"User registered successfully\"}"
+    },
+    {
+      "success": true,
+      "duration": 2.856046676635742,
+      "status_code": 200,
+      "email": "wcbfgqwb@test.com",
+      "response": "{\"message\":\"User registered successfully\"}"
+    },
+    {
+      "success": true,
+      "duration": 0.8769707679748535,
+      "status_code": 200,
+      "email": "japjmqkb@test.com",
+      "response": "{\"message\":\"User registered successfully\"}"
+    },
+    {
+      "success": true,
+      "duration": 2.868663787841797,
+      "status_code": 200,
+      "email": "pxxozrap@test.com",
+      "response": "{\"message\":\"User registered successfully\"}"
+    },
+    {
+      "success": true,
+      "duration": 2.869152784347534,
+      "status_code": 200,
+      "email": "ovjcxwmu@test.com",
+      "response": "{\"message\":\"User registered successfully\"}"
+    },
+    {
+      "success": true,
+      "duration": 2.8694489002227783,
+      "status_code": 200,
+      "email": "euxhsuiv@test.com",
+      "response": "{\"message\":\"User registered successfully\"}"
+    },
+    {
+      "success": true,
+      "duration": 2.8689632415771484,
+      "status_code": 200,
+      "email": "uxfmmibk@test.com",
+      "response": "{\"message\":\"User registered successfully\"}"
+    },
+    {
+      "success": true,
+      "duration": 0.7155368328094482,
+      "status_code": 200,
+      "email": "akvssevo@test.com",
+      "response": "{\"message\":\"User registered successfully\"}"
+    },
+    {
+      "success": true,
+      "duration": 2.3065526485443115,
+      "status_code": 200,
+      "email": "vthtzkdt@test.com",
+      "response": "{\"message\":\"User registered successfully\"}"
+    },
+    {
+      "success": true,
+      "duration": 2.304536819458008,
+      "status_code": 200,
+      "email": "qhhrhdgc@test.com",
+      "response": "{\"message\":\"User registered successfully\"}"
+    },
+    {
+      "success": true,
+      "duration": 2.305359125137329,
+      "status_code": 200,
+      "email": "lgsndbwc@test.com",
+      "response": "{\"message\":\"User registered successfully\"}"
+    },
+    {
+      "success": true,
+      "duration": 0.8708288669586182,
+      "status_code": 200,
+      "email": "bypihdam@test.com",
+      "response": "{\"message\":\"User registered successfully\"}"
+    },
+    {
+      "success": true,
+      "duration": 0.7486977577209473,
+      "status_code": 200,
+      "email": "ombuqmdj@test.com",
+      "response": "{\"message\":\"User registered successfully\"}"
+    },
+    {
+      "success": true,
+      "duration": 0.8557531833648682,
+      "status_code": 200,
+      "email": "tldczyja@test.com",
+      "response": "{\"message\":\"User registered successfully\"}"
+    },
+    {
+      "success": true,
+      "duration": 0.8469517230987549,
+      "status_code": 200,
+      "email": "klxdkegu@test.com",
+      "response": "{\"message\":\"User registered successfully\"}"
+    },
+    {
+      "success": true,
+      "duration": 0.6894164085388184,
+      "status_code": 200,
+      "email": "sbebojri@test.com",
+      "response": "{\"message\":\"User registered successfully\"}"
+    },
+    {
+      "success": true,
+      "duration": 1.5564548969268799,
+      "status_code": 200,
+      "email": "vjyysfjx@test.com",
+      "response": "{\"message\":\"User registered successfully\"}"
+    },
+    {
+      "success": true,
+      "duration": 2.4620254039764404,
+      "status_code": 200,
+      "email": "deozslhi@test.com",
+      "response": "{\"message\":\"User registered successfully\"}"
+    },
+    {
+      "success": true,
+      "duration": 1.556276559829712,
+      "status_code": 200,
+      "email": "sburdtwp@test.com",
+      "response": "{\"message\":\"User registered successfully\"}"
+    },
+    {
+      "success": true,
+      "duration": 2.460491418838501,
+      "status_code": 200,
+      "email": "dyckieol@test.com",
+      "response": "{\"message\":\"User registered successfully\"}"
+    },
+    {
+      "success": true,
+      "duration": 2.4606709480285645,
+      "status_code": 200,
+      "email": "wpmzkvom@test.com",
+      "response": "{\"message\":\"User registered successfully\"}"
+    },
+    {
+      "success": true,
+      "duration": 3.3314452171325684,
+      "status_code": 200,
+      "email": "qhugeqhr@test.com",
+      "response": "{\"message\":\"User registered successfully\"}"
+    },
+    {
+      "success": true,
+      "duration": 3.3309526443481445,
+      "status_code": 200,
+      "email": "gxdhonag@test.com",
+      "response": "{\"message\":\"User registered successfully\"}"
+    },
+    {
+      "success": true,
+      "duration": 3.3294875621795654,
+      "status_code": 200,
+      "email": "bohoindi@test.com",
+      "response": "{\"message\":\"User registered successfully\"}"
+    },
+    {
+      "success": true,
+      "duration": 3.3299100399017334,
+      "status_code": 200,
+      "email": "mvhywrjv@test.com",
+      "response": "{\"message\":\"User registered successfully\"}"
+    },
+    {
+      "success": true,
+      "duration": 0.9074149131774902,
+      "status_code": 200,
+      "email": "dbrdwefv@test.com",
+      "response": "{\"message\":\"User registered successfully\"}"
+    },
+    {
+      "success": true,
+      "duration": 1.061859130859375,
+      "status_code": 200,
+      "email": "spfrmwjw@test.com",
+      "response": "{\"message\":\"User registered successfully\"}"
+    },
+    {
+      "success": true,
+      "duration": 2.001384973526001,
+      "status_code": 200,
+      "email": "dictxmbk@test.com",
+      "response": "{\"message\":\"User registered successfully\"}"
+    },
+    {
+      "success": true,
+      "duration": 2.00663161277771,
+      "status_code": 200,
+      "email": "dkotciwr@test.com",
+      "response": "{\"message\":\"User registered successfully\"}"
+    },
+    {
+      "success": true,
+      "duration": 2.688682794570923,
+      "status_code": 200,
+      "email": "kxnpqrxy@test.com",
+      "response": "{\"message\":\"User registered successfully\"}"
+    },
+    {
+      "success": true,
+      "duration": 2.686086654663086,
+      "status_code": 200,
+      "email": "rurabaei@test.com",
+      "response": "{\"message\":\"User registered successfully\"}"
+    },
+    {
+      "success": true,
+      "duration": 2.687077045440674,
+      "status_code": 200,
+      "email": "uypjyuba@test.com",
+      "response": "{\"message\":\"User registered successfully\"}"
+    },
+    {
+      "success": true,
+      "duration": 1.173919916152954,
+      "status_code": 200,
+      "email": "nauptjop@test.com",
+      "response": "{\"message\":\"User registered successfully\"}"
+    },
+    {
+      "success": true,
+      "duration": 0.8514688014984131,
+      "status_code": 200,
+      "email": "kfszbibc@test.com",
+      "response": "{\"message\":\"User registered successfully\"}"
+    },
+    {
+      "success": true,
+      "duration": 1.0563979148864746,
+      "status_code": 200,
+      "email": "vmzbbnib@test.com",
+      "response": "{\"message\":\"User registered successfully\"}"
+    },
+    {
+      "success": true,
+      "duration": 0.9528243541717529,
+      "status_code": 200,
+      "email": "eqlqpbpw@test.com",
+      "response": "{\"message\":\"User registered successfully\"}"
+    }
+  ]
+}

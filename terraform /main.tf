@@ -371,10 +371,18 @@ resource "aws_security_group" "private_key_server" {
 
   # Allow only backend to communicate with private key server
   ingress {
-    from_port       = 8080
-    to_port         = 8080
+    from_port       = 8081
+    to_port         = 8081
     protocol        = "tcp"
     security_groups = [aws_security_group.backend.id]
+  }
+
+  # Allow Prometheus to scrape metrics
+  ingress {
+    from_port       = 8001
+    to_port         = 8001
+    protocol        = "tcp"
+    security_groups = [aws_security_group.grafana.id]
   }
 
   egress {
@@ -391,8 +399,8 @@ resource "aws_security_group" "private_key_server" {
 
 # Private Key Server EC2 Instance
 resource "aws_instance" "private_key_server" {
-  ami           = "ami-08bda674c2c7d3be0" # Ubuntu 22.04 LTS
-  instance_type = "t2.micro"
+  ami           = "ami-08bda674c2c7d3be0" # fastapi amis
+  instance_type = "t3.small"
   subnet_id     = aws_subnet.private.id
   key_name      = var.key_name
   

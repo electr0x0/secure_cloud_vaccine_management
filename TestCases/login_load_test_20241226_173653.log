@@ -1,0 +1,218 @@
+2024-12-26 17:36:53,154 - INFO - Loading test users from load_test_results_20241226_173502.json
+2024-12-26 17:36:53,155 - INFO - Starting login load test with 100 users (10 concurrent)
+2024-12-26 17:36:53,155 - INFO - Attempting login for email: obgxxkjb@test.com
+2024-12-26 17:36:53,155 - INFO - Attempting login for email: cdklpjmu@test.com
+2024-12-26 17:36:53,155 - INFO - Attempting login for email: nzqhzczi@test.com
+2024-12-26 17:36:53,156 - INFO - Attempting login for email: kdgayjyc@test.com
+2024-12-26 17:36:53,157 - INFO - Attempting login for email: vnpbaqll@test.com
+2024-12-26 17:36:53,158 - INFO - Attempting login for email: nnnwmapa@test.com
+2024-12-26 17:36:53,158 - INFO - Attempting login for email: syymbfvx@test.com
+2024-12-26 17:36:53,159 - INFO - Attempting login for email: dnnqmjzu@test.com
+2024-12-26 17:36:53,159 - INFO - Attempting login for email: rtpwodnt@test.com
+2024-12-26 17:36:53,160 - INFO - Attempting login for email: xsxdvhay@test.com
+2024-12-26 17:36:55,162 - INFO - Login successful for obgxxkjb@test.com
+2024-12-26 17:36:55,162 - INFO - Login successful for rtpwodnt@test.com
+2024-12-26 17:36:55,163 - INFO - Login successful for dnnqmjzu@test.com
+2024-12-26 17:36:55,163 - INFO - Login successful for cdklpjmu@test.com
+2024-12-26 17:36:55,164 - INFO - Login successful for nnnwmapa@test.com
+2024-12-26 17:36:55,164 - INFO - Login successful for nzqhzczi@test.com
+2024-12-26 17:36:55,164 - INFO - Login successful for kdgayjyc@test.com
+2024-12-26 17:36:55,164 - INFO - Attempting login for email: zzpgljoc@test.com
+2024-12-26 17:36:55,165 - INFO - Attempting login for email: zahgczqt@test.com
+2024-12-26 17:36:55,165 - INFO - Attempting login for email: hknnfjrt@test.com
+2024-12-26 17:36:55,165 - INFO - Attempting login for email: buutrbhp@test.com
+2024-12-26 17:36:55,165 - INFO - Attempting login for email: kwupgdle@test.com
+2024-12-26 17:36:55,165 - INFO - Attempting login for email: qxicpocr@test.com
+2024-12-26 17:36:55,165 - INFO - Attempting login for email: jpqsyifl@test.com
+2024-12-26 17:36:55,177 - INFO - Login successful for vnpbaqll@test.com
+2024-12-26 17:36:55,177 - INFO - Attempting login for email: udfnwgbp@test.com
+2024-12-26 17:36:55,186 - INFO - Login successful for xsxdvhay@test.com
+2024-12-26 17:36:55,186 - INFO - Attempting login for email: kvnaeesu@test.com
+2024-12-26 17:36:55,202 - INFO - Login successful for syymbfvx@test.com
+2024-12-26 17:36:55,202 - INFO - Attempting login for email: trnxxngq@test.com
+2024-12-26 17:36:56,899 - INFO - Login successful for qxicpocr@test.com
+2024-12-26 17:36:56,899 - INFO - Login successful for kwupgdle@test.com
+2024-12-26 17:36:56,899 - INFO - Login successful for buutrbhp@test.com
+2024-12-26 17:36:56,900 - INFO - Login successful for udfnwgbp@test.com
+2024-12-26 17:36:56,900 - INFO - Login successful for jpqsyifl@test.com
+2024-12-26 17:36:56,900 - INFO - Login successful for hknnfjrt@test.com
+2024-12-26 17:36:56,901 - INFO - Login successful for zzpgljoc@test.com
+2024-12-26 17:36:56,901 - INFO - Login successful for kvnaeesu@test.com
+2024-12-26 17:36:56,901 - INFO - Login successful for zahgczqt@test.com
+2024-12-26 17:36:56,902 - INFO - Login successful for trnxxngq@test.com
+2024-12-26 17:36:56,902 - INFO - Attempting login for email: udyrjfkg@test.com
+2024-12-26 17:36:56,902 - INFO - Attempting login for email: khuooajx@test.com
+2024-12-26 17:36:56,902 - INFO - Attempting login for email: dpylwblu@test.com
+2024-12-26 17:36:56,902 - INFO - Attempting login for email: shsegjtj@test.com
+2024-12-26 17:36:56,902 - INFO - Attempting login for email: ajwsgrhn@test.com
+2024-12-26 17:36:56,902 - INFO - Attempting login for email: skpgeyxl@test.com
+2024-12-26 17:36:56,902 - INFO - Attempting login for email: zdjjxnet@test.com
+2024-12-26 17:36:56,902 - INFO - Attempting login for email: qjflnnza@test.com
+2024-12-26 17:36:56,903 - INFO - Attempting login for email: gwhumguu@test.com
+2024-12-26 17:36:56,903 - INFO - Attempting login for email: qxvdatwa@test.com
+2024-12-26 17:36:58,616 - INFO - Login successful for udyrjfkg@test.com
+2024-12-26 17:36:58,616 - INFO - Attempting login for email: epsxsghw@test.com
+2024-12-26 17:36:58,618 - INFO - Login successful for shsegjtj@test.com
+2024-12-26 17:36:58,618 - INFO - Attempting login for email: hdafmjzd@test.com
+2024-12-26 17:36:58,622 - INFO - Login successful for zdjjxnet@test.com
+2024-12-26 17:36:58,622 - INFO - Attempting login for email: asfqijdm@test.com
+2024-12-26 17:36:58,627 - INFO - Login successful for khuooajx@test.com
+2024-12-26 17:36:58,627 - INFO - Attempting login for email: fizjcvlj@test.com
+2024-12-26 17:36:58,629 - INFO - Login successful for gwhumguu@test.com
+2024-12-26 17:36:58,629 - INFO - Attempting login for email: rlovjtjl@test.com
+2024-12-26 17:36:58,630 - INFO - Login successful for qxvdatwa@test.com
+2024-12-26 17:36:58,630 - INFO - Attempting login for email: bfxvobrk@test.com
+2024-12-26 17:36:58,631 - INFO - Login successful for dpylwblu@test.com
+2024-12-26 17:36:58,631 - INFO - Attempting login for email: kkfyfihj@test.com
+2024-12-26 17:36:58,632 - INFO - Login successful for qjflnnza@test.com
+2024-12-26 17:36:58,633 - INFO - Attempting login for email: vpqbugue@test.com
+2024-12-26 17:36:58,634 - INFO - Login successful for skpgeyxl@test.com
+2024-12-26 17:36:58,634 - INFO - Login successful for ajwsgrhn@test.com
+2024-12-26 17:36:58,634 - INFO - Attempting login for email: bhwkfepo@test.com
+2024-12-26 17:36:58,634 - INFO - Attempting login for email: rlgjyoqx@test.com
+2024-12-26 17:37:00,280 - INFO - Login successful for epsxsghw@test.com
+2024-12-26 17:37:00,280 - INFO - Login successful for asfqijdm@test.com
+2024-12-26 17:37:00,280 - INFO - Attempting login for email: lfihiyag@test.com
+2024-12-26 17:37:00,280 - INFO - Attempting login for email: vlwercrt@test.com
+2024-12-26 17:37:00,286 - INFO - Login successful for hdafmjzd@test.com
+2024-12-26 17:37:00,286 - INFO - Attempting login for email: lqkkhvro@test.com
+2024-12-26 17:37:00,293 - INFO - Login successful for bfxvobrk@test.com
+2024-12-26 17:37:00,293 - INFO - Attempting login for email: sqbrfovq@test.com
+2024-12-26 17:37:00,296 - INFO - Login successful for bhwkfepo@test.com
+2024-12-26 17:37:00,297 - INFO - Login successful for rlovjtjl@test.com
+2024-12-26 17:37:00,297 - INFO - Attempting login for email: afbqkhvp@test.com
+2024-12-26 17:37:00,298 - INFO - Login successful for kkfyfihj@test.com
+2024-12-26 17:37:00,298 - INFO - Attempting login for email: gnwgnpah@test.com
+2024-12-26 17:37:00,298 - INFO - Attempting login for email: esxcblxl@test.com
+2024-12-26 17:37:00,299 - INFO - Login successful for fizjcvlj@test.com
+2024-12-26 17:37:00,299 - INFO - Login successful for rlgjyoqx@test.com
+2024-12-26 17:37:00,299 - INFO - Login successful for vpqbugue@test.com
+2024-12-26 17:37:00,299 - INFO - Attempting login for email: qkhhcmeh@test.com
+2024-12-26 17:37:00,299 - INFO - Attempting login for email: otwvkjpo@test.com
+2024-12-26 17:37:00,300 - INFO - Attempting login for email: eozyoale@test.com
+2024-12-26 17:37:02,325 - INFO - Login successful for lfihiyag@test.com
+2024-12-26 17:37:02,325 - INFO - Login successful for vlwercrt@test.com
+2024-12-26 17:37:02,326 - INFO - Login successful for gnwgnpah@test.com
+2024-12-26 17:37:02,326 - INFO - Login successful for qkhhcmeh@test.com
+2024-12-26 17:37:02,327 - INFO - Attempting login for email: deahxwqb@test.com
+2024-12-26 17:37:02,327 - INFO - Attempting login for email: cgkvoprb@test.com
+2024-12-26 17:37:02,327 - INFO - Attempting login for email: aspsztsr@test.com
+2024-12-26 17:37:02,327 - INFO - Attempting login for email: vufwraup@test.com
+2024-12-26 17:37:02,338 - INFO - Login successful for lqkkhvro@test.com
+2024-12-26 17:37:02,338 - INFO - Attempting login for email: jluikzsx@test.com
+2024-12-26 17:37:02,346 - INFO - Login successful for afbqkhvp@test.com
+2024-12-26 17:37:02,346 - INFO - Login successful for esxcblxl@test.com
+2024-12-26 17:37:02,346 - INFO - Login successful for sqbrfovq@test.com
+2024-12-26 17:37:02,347 - INFO - Attempting login for email: jjdhvqmf@test.com
+2024-12-26 17:37:02,347 - INFO - Attempting login for email: ktpbfnfx@test.com
+2024-12-26 17:37:02,347 - INFO - Attempting login for email: dlmkyjcw@test.com
+2024-12-26 17:37:02,348 - INFO - Login successful for eozyoale@test.com
+2024-12-26 17:37:02,348 - INFO - Attempting login for email: cfejfniv@test.com
+2024-12-26 17:37:02,351 - INFO - Login successful for otwvkjpo@test.com
+2024-12-26 17:37:02,351 - INFO - Attempting login for email: xsaybcoa@test.com
+2024-12-26 17:37:04,005 - INFO - Login successful for deahxwqb@test.com
+2024-12-26 17:37:04,006 - INFO - Attempting login for email: zpbmwtbc@test.com
+2024-12-26 17:37:04,016 - INFO - Login successful for ktpbfnfx@test.com
+2024-12-26 17:37:04,018 - INFO - Login successful for dlmkyjcw@test.com
+2024-12-26 17:37:04,018 - INFO - Login successful for vufwraup@test.com
+2024-12-26 17:37:04,018 - INFO - Attempting login for email: frnukwtr@test.com
+2024-12-26 17:37:04,018 - INFO - Attempting login for email: zgylejmw@test.com
+2024-12-26 17:37:04,018 - INFO - Attempting login for email: ubaveweq@test.com
+2024-12-26 17:37:04,029 - INFO - Login successful for cfejfniv@test.com
+2024-12-26 17:37:04,029 - INFO - Attempting login for email: ejvhahon@test.com
+2024-12-26 17:37:04,040 - INFO - Login successful for jluikzsx@test.com
+2024-12-26 17:37:04,040 - INFO - Attempting login for email: tfvvhdqa@test.com
+2024-12-26 17:37:04,041 - INFO - Login successful for xsaybcoa@test.com
+2024-12-26 17:37:04,041 - INFO - Attempting login for email: apjbmtzu@test.com
+2024-12-26 17:37:04,044 - INFO - Login successful for jjdhvqmf@test.com
+2024-12-26 17:37:04,044 - INFO - Attempting login for email: ggszpkez@test.com
+2024-12-26 17:37:04,045 - INFO - Login successful for cgkvoprb@test.com
+2024-12-26 17:37:04,045 - INFO - Attempting login for email: kgukckit@test.com
+2024-12-26 17:37:04,047 - INFO - Login successful for aspsztsr@test.com
+2024-12-26 17:37:04,047 - INFO - Attempting login for email: etdrsvbv@test.com
+2024-12-26 17:37:05,704 - INFO - Login successful for zpbmwtbc@test.com
+2024-12-26 17:37:05,704 - INFO - Login successful for ejvhahon@test.com
+2024-12-26 17:37:05,704 - INFO - Login successful for zgylejmw@test.com
+2024-12-26 17:37:05,705 - INFO - Login successful for apjbmtzu@test.com
+2024-12-26 17:37:05,705 - INFO - Login successful for frnukwtr@test.com
+2024-12-26 17:37:05,705 - INFO - Login successful for tfvvhdqa@test.com
+2024-12-26 17:37:05,705 - INFO - Login successful for kgukckit@test.com
+2024-12-26 17:37:05,705 - INFO - Login successful for ggszpkez@test.com
+2024-12-26 17:37:05,705 - INFO - Login successful for ubaveweq@test.com
+2024-12-26 17:37:05,706 - INFO - Login successful for etdrsvbv@test.com
+2024-12-26 17:37:05,706 - INFO - Attempting login for email: ugiiwzdg@test.com
+2024-12-26 17:37:05,706 - INFO - Attempting login for email: fekmudpn@test.com
+2024-12-26 17:37:05,706 - INFO - Attempting login for email: zzycpvrl@test.com
+2024-12-26 17:37:05,706 - INFO - Attempting login for email: uixucnta@test.com
+2024-12-26 17:37:05,706 - INFO - Attempting login for email: ryavqoio@test.com
+2024-12-26 17:37:05,706 - INFO - Attempting login for email: cqolgdul@test.com
+2024-12-26 17:37:05,706 - INFO - Attempting login for email: rsfhhzki@test.com
+2024-12-26 17:37:05,707 - INFO - Attempting login for email: vlwburvm@test.com
+2024-12-26 17:37:05,707 - INFO - Attempting login for email: ocumwpiu@test.com
+2024-12-26 17:37:05,707 - INFO - Attempting login for email: lntxunub@test.com
+2024-12-26 17:37:07,424 - INFO - Login successful for rsfhhzki@test.com
+2024-12-26 17:37:07,424 - INFO - Attempting login for email: ckzvuuyy@test.com
+2024-12-26 17:37:07,425 - INFO - Login successful for ugiiwzdg@test.com
+2024-12-26 17:37:07,425 - INFO - Attempting login for email: rldosuux@test.com
+2024-12-26 17:37:07,426 - INFO - Login successful for zzycpvrl@test.com
+2024-12-26 17:37:07,427 - INFO - Attempting login for email: knoqahyt@test.com
+2024-12-26 17:37:07,427 - INFO - Login successful for uixucnta@test.com
+2024-12-26 17:37:07,428 - INFO - Attempting login for email: tpagawgz@test.com
+2024-12-26 17:37:07,431 - INFO - Login successful for ryavqoio@test.com
+2024-12-26 17:37:07,431 - INFO - Login successful for fekmudpn@test.com
+2024-12-26 17:37:07,432 - INFO - Login successful for vlwburvm@test.com
+2024-12-26 17:37:07,432 - INFO - Login successful for lntxunub@test.com
+2024-12-26 17:37:07,432 - INFO - Attempting login for email: dzjscsbb@test.com
+2024-12-26 17:37:07,432 - INFO - Attempting login for email: ywoefzev@test.com
+2024-12-26 17:37:07,432 - INFO - Attempting login for email: wsphdrch@test.com
+2024-12-26 17:37:07,433 - INFO - Attempting login for email: wqvybthr@test.com
+2024-12-26 17:37:07,436 - INFO - Login successful for cqolgdul@test.com
+2024-12-26 17:37:07,436 - INFO - Login successful for ocumwpiu@test.com
+2024-12-26 17:37:07,436 - INFO - Attempting login for email: muwmusuj@test.com
+2024-12-26 17:37:07,436 - INFO - Attempting login for email: cwnrnlxw@test.com
+2024-12-26 17:37:09,167 - INFO - Login successful for rldosuux@test.com
+2024-12-26 17:37:09,167 - INFO - Login successful for ywoefzev@test.com
+2024-12-26 17:37:09,167 - INFO - Login successful for tpagawgz@test.com
+2024-12-26 17:37:09,168 - INFO - Attempting login for email: nopxnljs@test.com
+2024-12-26 17:37:09,168 - INFO - Attempting login for email: ddzwalrk@test.com
+2024-12-26 17:37:09,168 - INFO - Attempting login for email: ffswgpvs@test.com
+2024-12-26 17:37:09,174 - INFO - Login successful for ckzvuuyy@test.com
+2024-12-26 17:37:09,174 - INFO - Attempting login for email: ewysdpfy@test.com
+2024-12-26 17:37:09,175 - INFO - Login successful for knoqahyt@test.com
+2024-12-26 17:37:09,176 - INFO - Attempting login for email: dhosajmt@test.com
+2024-12-26 17:37:09,177 - INFO - Login successful for muwmusuj@test.com
+2024-12-26 17:37:09,177 - INFO - Login successful for cwnrnlxw@test.com
+2024-12-26 17:37:09,178 - INFO - Attempting login for email: esjctgrc@test.com
+2024-12-26 17:37:09,178 - INFO - Attempting login for email: jomgddxs@test.com
+2024-12-26 17:37:09,179 - INFO - Login successful for wsphdrch@test.com
+2024-12-26 17:37:09,179 - INFO - Attempting login for email: vuptwuza@test.com
+2024-12-26 17:37:09,180 - INFO - Login successful for dzjscsbb@test.com
+2024-12-26 17:37:09,180 - INFO - Attempting login for email: ctmmopqp@test.com
+2024-12-26 17:37:09,185 - INFO - Login successful for wqvybthr@test.com
+2024-12-26 17:37:09,185 - INFO - Attempting login for email: okfxuruo@test.com
+2024-12-26 17:37:10,822 - INFO - Login successful for nopxnljs@test.com
+2024-12-26 17:37:10,841 - INFO - Login successful for ffswgpvs@test.com
+2024-12-26 17:37:10,845 - INFO - Login successful for dhosajmt@test.com
+2024-12-26 17:37:10,851 - INFO - Login successful for esjctgrc@test.com
+2024-12-26 17:37:10,851 - INFO - Login successful for okfxuruo@test.com
+2024-12-26 17:37:10,852 - INFO - Login successful for ctmmopqp@test.com
+2024-12-26 17:37:10,853 - INFO - Login successful for ddzwalrk@test.com
+2024-12-26 17:37:10,853 - INFO - Login successful for vuptwuza@test.com
+2024-12-26 17:37:10,853 - INFO - Login successful for jomgddxs@test.com
+2024-12-26 17:37:10,854 - INFO - Login successful for ewysdpfy@test.com
+2024-12-26 17:37:10,854 - INFO - 
+Login Load Test Results:
+2024-12-26 17:37:10,854 - INFO - ==================================================
+2024-12-26 17:37:10,854 - INFO - Total Time: 17.70 seconds
+2024-12-26 17:37:10,854 - INFO - Total Requests: 100
+2024-12-26 17:37:10,854 - INFO - Successful Requests: 100
+2024-12-26 17:37:10,854 - INFO - Failed Requests: 0
+2024-12-26 17:37:10,854 - INFO - Requests per Second: 5.65
+2024-12-26 17:37:10,854 - INFO - 
+Response Time Statistics (seconds):
+2024-12-26 17:37:10,854 - INFO - Average: 1.768
+2024-12-26 17:37:10,854 - INFO - Median: 1.724
+2024-12-26 17:37:10,854 - INFO - Min: 1.655
+2024-12-26 17:37:10,854 - INFO - Max: 2.054
+2024-12-26 17:37:10,855 - INFO - 
+Detailed results saved to login_load_test_results_20241226_173710.json

@@ -147,8 +147,12 @@ async def delete_key_pair(user_email: str, db: Session = Depends(get_db)):
 if __name__ == "__main__":
     # Only listen on Tailscale interface
     uvicorn.run(
-        "main:app", 
-        host="0.0.0.0",  # or your Tailscale IP if you want to be more restrictive
-        port=8001, 
-        reload=True
+        "main:app",
+        host="0.0.0.0",
+        port=8001,
+        reload=False,  # Disable reload in production
+        workers=4,     # Multiple workers for better performance
+        log_level="info",
+        proxy_headers=True,  # Trust proxy headers for proper IP handling
+        forwarded_allow_ips='*'  # Allow forwarded IPs since we're behind a proxy
     )
