@@ -362,3 +362,45 @@ resource "aws_security_group_rule" "backend_monitoring" {
   source_security_group_id = aws_security_group.grafana.id
   security_group_id       = aws_security_group.backend.id
 }
+
+# Security Group for Private Key Server
+resource "aws_security_group" "private_key_server" {
+  name        = "cloud-vaccine-private-key-server-sg"
+  description = "Security group for private key server"
+  vpc_id      = aws_vpc.vaccine_vpc.id
+
+  # Allow only backend to communicate with private key server
+  ingress {
+    from_port       = 8080
+    to_port         = 8080
+    protocol        = "tcp"
+    security_groups = [aws_security_group.backend.id]
+  }
+
+  egress {
+    from_port   = 0
+    to_port     = 0
+    protocol    = "-1"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+
+  tags = {
+    Name = "private-key-server-sg"
+  }
+}
+
+# Private Key Server EC2 Instance
+resource "aws_instance" "private_key_server" {
+  ami           = "ami-08bda674c2c7d3be0" # Ubuntu 22.04 LTS
+  instance_type = "t2.micro"
+  subnet_id     = aws_subnet.private.id
+  key_name      = var.key_name
+  
+  vpc_security_group_ids = [aws_security_group.private_key_server.id]
+  
+  associate_public_ip_address = false
+  
+  tags = {
+    Name = "vaccine-private-key-server"
+  }
+}

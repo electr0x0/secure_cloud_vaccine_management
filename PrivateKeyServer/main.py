@@ -1,7 +1,7 @@
 # app/main.py
 from fastapi import FastAPI, HTTPException, Depends, Request
 from starlette.middleware.base import BaseHTTPMiddleware 
-from starlette.responses import JSONResponse
+from starlette.responses import JSONResponse, Response
 from sqlalchemy.orm import Session
 from database import engine, get_db
 import models
@@ -11,8 +11,8 @@ import base64
 import uvicorn
 import auth
 import ipaddress
-from prometheus_fastapi_instrumentator import Instrumentator
-from prometheus_client import Counter, Histogram, Gauge
+from prometheus_client import Counter, Histogram, Gauge, CollectorRegistry
+import prometheus_client
 import time
 
 
@@ -20,15 +20,39 @@ models.Base.metadata.create_all(bind=engine)
 
 # List of allowed IPs
 ALLOWED_IPS = [
-    "100.114.11.98",
-    "127.0.0.1"  
+    "100.114.11.98", # CloudBackend
+    "127.0.0.1",
+    "100.127.99.47" # Monitoring Server
 ]
 
-# Add metrics
-key_generation_duration = Histogram('key_generation_duration_seconds', 'Time spent generating key pairs')
-decryption_duration = Histogram('decryption_duration_seconds', 'Time spent decrypting data')
-key_operations = Counter('key_operations_total', 'Total key operations', ['operation', 'status'])
-active_keys = Gauge('active_keys_total', 'Number of active key pairs')
+
+REGISTRY = CollectorRegistry()
+
+
+key_generation_duration = Histogram(
+    'key_generation_duration_seconds', 
+    'Time spent generating key pairs',
+    registry=REGISTRY
+)
+
+decryption_duration = Histogram(
+    'decryption_duration_seconds', 
+    'Time spent decrypting data',
+    registry=REGISTRY
+)
+
+key_operations = Counter(
+    'key_operations_total', 
+    'Total key operations', 
+    ['operation', 'status'],
+    registry=REGISTRY
+)
+
+active_keys = Gauge(
+    'active_keys_total', 
+    'Number of active key pairs',
+    registry=REGISTRY
+)
 
 class TailscaleMiddleware(BaseHTTPMiddleware):
     async def dispatch(self, request: Request, call_next):
@@ -55,8 +79,13 @@ app = FastAPI(
 # Add the middleware
 app.add_middleware(TailscaleMiddleware)
 
-# Initialize metrics
-Instrumentator().instrument(app).expose(app)
+# Add custom metrics endpoint
+@app.get("/metrics")
+async def metrics():
+    return Response(
+        prometheus_client.generate_latest(REGISTRY),
+        media_type="text/plain"
+    )
 
 def track_key_operation(operation, status="success"):
     key_operations.labels(operation=operation, status=status).inc()
