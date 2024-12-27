@@ -136,7 +136,7 @@ def run_login_load_test(results_file, concurrent_requests=10):
     logger.info(f"\nDetailed results saved to {results_file}")
 
 if __name__ == "__main__":
-    REGISTRATION_RESULTS_FILE = "load_test_results_20241226_173502.json"
+    REGISTRATION_RESULTS_FILE = "load_test_results_20241226_205612.json"
     CONCURRENT_REQUESTS = 10
     
     run_login_load_test(REGISTRATION_RESULTS_FILE, CONCURRENT_REQUESTS) 
