@@ -1,0 +1,217 @@
+2024-12-27 22:41:15,205 - INFO - Starting load test with 100 requests (10 concurrent)
+2024-12-27 22:41:15,206 - INFO - Attempting registration for email: hehdbmyk@test.com
+2024-12-27 22:41:15,207 - INFO - Attempting registration for email: kfwbbgsp@test.com
+2024-12-27 22:41:15,207 - INFO - Attempting registration for email: eyyswbqc@test.com
+2024-12-27 22:41:15,207 - INFO - Attempting registration for email: ycongyra@test.com
+2024-12-27 22:41:15,208 - INFO - Attempting registration for email: jexeiyov@test.com
+2024-12-27 22:41:15,208 - INFO - Attempting registration for email: vdtflgwz@test.com
+2024-12-27 22:41:15,211 - INFO - Attempting registration for email: qilgpcwq@test.com
+2024-12-27 22:41:15,211 - INFO - Attempting registration for email: kfsmhqch@test.com
+2024-12-27 22:41:15,212 - INFO - Attempting registration for email: mbqpxcmg@test.com
+2024-12-27 22:41:15,212 - INFO - Attempting registration for email: aarkxket@test.com
+2024-12-27 22:41:16,823 - INFO - Registration successful for mbqpxcmg@test.com
+2024-12-27 22:41:16,824 - INFO - Attempting registration for email: oddsoqoi@test.com
+2024-12-27 22:41:16,824 - INFO - Registration successful for qilgpcwq@test.com
+2024-12-27 22:41:16,824 - INFO - Attempting registration for email: ovhxflfd@test.com
+2024-12-27 22:41:17,048 - INFO - Registration successful for eyyswbqc@test.com
+2024-12-27 22:41:17,048 - INFO - Registration successful for kfwbbgsp@test.com
+2024-12-27 22:41:17,049 - INFO - Attempting registration for email: obnjzyei@test.com
+2024-12-27 22:41:17,049 - INFO - Attempting registration for email: qjnhsarj@test.com
+2024-12-27 22:41:18,261 - INFO - Registration successful for ovhxflfd@test.com
+2024-12-27 22:41:18,262 - INFO - Registration successful for oddsoqoi@test.com
+2024-12-27 22:41:18,262 - INFO - Attempting registration for email: ozcyzhfh@test.com
+2024-12-27 22:41:18,262 - INFO - Attempting registration for email: jzctlssj@test.com
+2024-12-27 22:41:18,386 - INFO - Registration successful for obnjzyei@test.com
+2024-12-27 22:41:18,386 - INFO - Registration successful for qjnhsarj@test.com
+2024-12-27 22:41:18,386 - INFO - Attempting registration for email: dwmptfpa@test.com
+2024-12-27 22:41:18,387 - INFO - Attempting registration for email: ubequieq@test.com
+2024-12-27 22:41:19,107 - INFO - Registration successful for jzctlssj@test.com
+2024-12-27 22:41:19,107 - INFO - Attempting registration for email: vtsrslrf@test.com
+2024-12-27 22:41:19,175 - INFO - Registration successful for ozcyzhfh@test.com
+2024-12-27 22:41:19,175 - INFO - Attempting registration for email: hfdqfcnx@test.com
+2024-12-27 22:41:19,440 - INFO - Registration successful for vdtflgwz@test.com
+2024-12-27 22:41:19,440 - INFO - Attempting registration for email: lfsdjwyc@test.com
+2024-12-27 22:41:19,440 - INFO - Registration successful for jexeiyov@test.com
+2024-12-27 22:41:19,440 - INFO - Attempting registration for email: zwjkqknd@test.com
+2024-12-27 22:41:19,444 - INFO - Registration successful for kfsmhqch@test.com
+2024-12-27 22:41:19,444 - INFO - Attempting registration for email: twpubgyj@test.com
+2024-12-27 22:41:19,447 - INFO - Registration successful for aarkxket@test.com
+2024-12-27 22:41:19,447 - INFO - Registration successful for hehdbmyk@test.com
+2024-12-27 22:41:19,447 - INFO - Registration successful for ycongyra@test.com
+2024-12-27 22:41:19,448 - INFO - Attempting registration for email: npvrsuaz@test.com
+2024-12-27 22:41:19,448 - INFO - Attempting registration for email: yizucexi@test.com
+2024-12-27 22:41:19,448 - INFO - Attempting registration for email: mktulbgk@test.com
+2024-12-27 22:41:19,932 - INFO - Registration successful for hfdqfcnx@test.com
+2024-12-27 22:41:19,932 - INFO - Attempting registration for email: fdoelxyl@test.com
+2024-12-27 22:41:19,940 - INFO - Registration successful for ubequieq@test.com
+2024-12-27 22:41:19,940 - INFO - Attempting registration for email: wsrvkjmy@test.com
+2024-12-27 22:41:19,941 - INFO - Registration successful for dwmptfpa@test.com
+2024-12-27 22:41:19,942 - INFO - Attempting registration for email: mdsyymcf@test.com
+2024-12-27 22:41:20,733 - INFO - Registration successful for fdoelxyl@test.com
+2024-12-27 22:41:20,733 - INFO - Attempting registration for email: coadbdgv@test.com
+2024-12-27 22:41:20,780 - INFO - Registration successful for lfsdjwyc@test.com
+2024-12-27 22:41:20,781 - INFO - Attempting registration for email: zwitrpoj@test.com
+2024-12-27 22:41:20,815 - INFO - Registration successful for wsrvkjmy@test.com
+2024-12-27 22:41:20,815 - INFO - Attempting registration for email: xfdqixbx@test.com
+2024-12-27 22:41:21,380 - INFO - Registration successful for zwjkqknd@test.com
+2024-12-27 22:41:21,381 - INFO - Attempting registration for email: jaihgwnb@test.com
+2024-12-27 22:41:21,384 - INFO - Registration successful for mdsyymcf@test.com
+2024-12-27 22:41:21,384 - INFO - Attempting registration for email: oumwrblz@test.com
+2024-12-27 22:41:21,451 - INFO - Registration successful for coadbdgv@test.com
+2024-12-27 22:41:21,451 - INFO - Attempting registration for email: dvxongvo@test.com
+2024-12-27 22:41:21,656 - INFO - Registration successful for vtsrslrf@test.com
+2024-12-27 22:41:21,657 - INFO - Attempting registration for email: xvezcsls@test.com
+2024-12-27 22:41:22,205 - INFO - Registration successful for oumwrblz@test.com
+2024-12-27 22:41:22,205 - INFO - Attempting registration for email: yzwaaspi@test.com
+2024-12-27 22:41:22,322 - INFO - Registration successful for zwitrpoj@test.com
+2024-12-27 22:41:22,322 - INFO - Attempting registration for email: dmggiyoh@test.com
+2024-12-27 22:41:22,325 - INFO - Registration successful for dvxongvo@test.com
+2024-12-27 22:41:22,325 - INFO - Attempting registration for email: ffeuuqgo@test.com
+2024-12-27 22:41:22,327 - INFO - Registration successful for twpubgyj@test.com
+2024-12-27 22:41:22,327 - INFO - Attempting registration for email: luwmqgpa@test.com
+2024-12-27 22:41:22,624 - INFO - Registration successful for jaihgwnb@test.com
+2024-12-27 22:41:22,624 - INFO - Attempting registration for email: alpojfrf@test.com
+2024-12-27 22:41:23,035 - INFO - Registration successful for npvrsuaz@test.com
+2024-12-27 22:41:23,035 - INFO - Registration successful for mktulbgk@test.com
+2024-12-27 22:41:23,036 - INFO - Registration successful for yizucexi@test.com
+2024-12-27 22:41:23,036 - INFO - Attempting registration for email: zxvcfcar@test.com
+2024-12-27 22:41:23,036 - INFO - Registration successful for xfdqixbx@test.com
+2024-12-27 22:41:23,036 - INFO - Attempting registration for email: otjltuny@test.com
+2024-12-27 22:41:23,037 - INFO - Attempting registration for email: bgarqnmr@test.com
+2024-12-27 22:41:23,037 - INFO - Attempting registration for email: rzayqhcl@test.com
+2024-12-27 22:41:23,140 - INFO - Registration successful for dmggiyoh@test.com
+2024-12-27 22:41:23,141 - INFO - Attempting registration for email: wdsxfaxs@test.com
+2024-12-27 22:41:23,240 - INFO - Registration successful for xvezcsls@test.com
+2024-12-27 22:41:23,240 - INFO - Attempting registration for email: ututiucc@test.com
+2024-12-27 22:41:23,448 - INFO - Registration successful for yzwaaspi@test.com
+2024-12-27 22:41:23,448 - INFO - Attempting registration for email: gpjxpsxl@test.com
+2024-12-27 22:41:23,938 - INFO - Registration successful for wdsxfaxs@test.com
+2024-12-27 22:41:23,939 - INFO - Attempting registration for email: dnpymiln@test.com
+2024-12-27 22:41:24,061 - INFO - Registration successful for alpojfrf@test.com
+2024-12-27 22:41:24,062 - INFO - Attempting registration for email: yafzvgba@test.com
+2024-12-27 22:41:24,062 - INFO - Registration successful for ututiucc@test.com
+2024-12-27 22:41:24,063 - INFO - Attempting registration for email: awalxcvc@test.com
+2024-12-27 22:41:24,520 - INFO - Registration successful for luwmqgpa@test.com
+2024-12-27 22:41:24,520 - INFO - Attempting registration for email: yhkfvtxj@test.com
+2024-12-27 22:41:24,521 - INFO - Registration successful for ffeuuqgo@test.com
+2024-12-27 22:41:24,521 - INFO - Attempting registration for email: gjmgouah@test.com
+2024-12-27 22:41:24,524 - INFO - Registration successful for gpjxpsxl@test.com
+2024-12-27 22:41:24,524 - INFO - Attempting registration for email: zrsieyox@test.com
+2024-12-27 22:41:24,605 - INFO - Registration successful for dnpymiln@test.com
+2024-12-27 22:41:24,606 - INFO - Attempting registration for email: nwbrkodt@test.com
+2024-12-27 22:41:25,348 - INFO - Registration successful for zrsieyox@test.com
+2024-12-27 22:41:25,348 - INFO - Attempting registration for email: rdwxskqt@test.com
+2024-12-27 22:41:25,453 - INFO - Registration successful for awalxcvc@test.com
+2024-12-27 22:41:25,454 - INFO - Attempting registration for email: itcwueyn@test.com
+2024-12-27 22:41:25,469 - INFO - Registration successful for zxvcfcar@test.com
+2024-12-27 22:41:25,470 - INFO - Registration successful for otjltuny@test.com
+2024-12-27 22:41:25,470 - INFO - Attempting registration for email: hnnyqxum@test.com
+2024-12-27 22:41:25,470 - INFO - Registration successful for bgarqnmr@test.com
+2024-12-27 22:41:25,470 - INFO - Registration successful for rzayqhcl@test.com
+2024-12-27 22:41:25,471 - INFO - Attempting registration for email: majbrysc@test.com
+2024-12-27 22:41:25,472 - INFO - Attempting registration for email: xnwreuth@test.com
+2024-12-27 22:41:25,472 - INFO - Attempting registration for email: sfnouxwm@test.com
+2024-12-27 22:41:25,764 - INFO - Registration successful for yhkfvtxj@test.com
+2024-12-27 22:41:25,765 - INFO - Attempting registration for email: hhqlklmd@test.com
+2024-12-27 22:41:26,098 - INFO - Registration successful for yafzvgba@test.com
+2024-12-27 22:41:26,099 - INFO - Attempting registration for email: clcfrrnw@test.com
+2024-12-27 22:41:26,279 - INFO - Registration successful for itcwueyn@test.com
+2024-12-27 22:41:26,279 - INFO - Attempting registration for email: cutqmnik@test.com
+2024-12-27 22:41:26,700 - INFO - Registration successful for nwbrkodt@test.com
+2024-12-27 22:41:26,700 - INFO - Attempting registration for email: rvlhvgbn@test.com
+2024-12-27 22:41:26,700 - INFO - Registration successful for hhqlklmd@test.com
+2024-12-27 22:41:26,701 - INFO - Attempting registration for email: zsetibfq@test.com
+2024-12-27 22:41:26,898 - INFO - Registration successful for rdwxskqt@test.com
+2024-12-27 22:41:26,898 - INFO - Attempting registration for email: rhnwfoja@test.com
+2024-12-27 22:41:26,899 - INFO - Registration successful for clcfrrnw@test.com
+2024-12-27 22:41:26,899 - INFO - Attempting registration for email: hyzoyrkk@test.com
+2024-12-27 22:41:27,024 - INFO - Registration successful for gjmgouah@test.com
+2024-12-27 22:41:27,024 - INFO - Attempting registration for email: ochabclp@test.com
+2024-12-27 22:41:27,069 - INFO - Registration successful for cutqmnik@test.com
+2024-12-27 22:41:27,069 - INFO - Attempting registration for email: iimsjovq@test.com
+2024-12-27 22:41:27,824 - INFO - Registration successful for ochabclp@test.com
+2024-12-27 22:41:27,824 - INFO - Attempting registration for email: hotoawdf@test.com
+2024-12-27 22:41:28,249 - INFO - Registration successful for hnnyqxum@test.com
+2024-12-27 22:41:28,249 - INFO - Registration successful for xnwreuth@test.com
+2024-12-27 22:41:28,249 - INFO - Attempting registration for email: cgicxxkn@test.com
+2024-12-27 22:41:28,249 - INFO - Attempting registration for email: hlieimkf@test.com
+2024-12-27 22:41:28,252 - INFO - Registration successful for majbrysc@test.com
+2024-12-27 22:41:28,252 - INFO - Registration successful for sfnouxwm@test.com
+2024-12-27 22:41:28,252 - INFO - Attempting registration for email: uzsuicpr@test.com
+2024-12-27 22:41:28,252 - INFO - Attempting registration for email: aukvyaxb@test.com
+2024-12-27 22:41:28,393 - INFO - Registration successful for rhnwfoja@test.com
+2024-12-27 22:41:28,394 - INFO - Registration successful for hyzoyrkk@test.com
+2024-12-27 22:41:28,394 - INFO - Attempting registration for email: hdlbyfgi@test.com
+2024-12-27 22:41:28,394 - INFO - Attempting registration for email: mjhfvjha@test.com
+2024-12-27 22:41:28,519 - INFO - Registration successful for rvlhvgbn@test.com
+2024-12-27 22:41:28,519 - INFO - Attempting registration for email: huahnrlk@test.com
+2024-12-27 22:41:28,520 - INFO - Registration successful for zsetibfq@test.com
+2024-12-27 22:41:28,520 - INFO - Attempting registration for email: eqfpzles@test.com
+2024-12-27 22:41:28,522 - INFO - Registration successful for iimsjovq@test.com
+2024-12-27 22:41:28,522 - INFO - Attempting registration for email: jhfgccoy@test.com
+2024-12-27 22:41:28,561 - INFO - Registration successful for hotoawdf@test.com
+2024-12-27 22:41:28,561 - INFO - Attempting registration for email: fkrukscg@test.com
+2024-12-27 22:41:29,309 - INFO - Registration successful for jhfgccoy@test.com
+2024-12-27 22:41:29,309 - INFO - Attempting registration for email: hveyofru@test.com
+2024-12-27 22:41:29,944 - INFO - Registration successful for huahnrlk@test.com
+2024-12-27 22:41:29,944 - INFO - Attempting registration for email: fccxedip@test.com
+2024-12-27 22:41:29,945 - INFO - Registration successful for eqfpzles@test.com
+2024-12-27 22:41:29,945 - INFO - Attempting registration for email: skidrbfv@test.com
+2024-12-27 22:41:30,125 - INFO - Registration successful for hveyofru@test.com
+2024-12-27 22:41:30,125 - INFO - Attempting registration for email: qnxdlioi@test.com
+2024-12-27 22:41:30,237 - INFO - Registration successful for hdlbyfgi@test.com
+2024-12-27 22:41:30,238 - INFO - Registration successful for fkrukscg@test.com
+2024-12-27 22:41:30,238 - INFO - Attempting registration for email: czbjgsuw@test.com
+2024-12-27 22:41:30,239 - INFO - Registration successful for mjhfvjha@test.com
+2024-12-27 22:41:30,239 - INFO - Attempting registration for email: osyntyen@test.com
+2024-12-27 22:41:30,239 - INFO - Attempting registration for email: robezzwj@test.com
+2024-12-27 22:41:30,892 - INFO - Registration successful for uzsuicpr@test.com
+2024-12-27 22:41:30,893 - INFO - Registration successful for hlieimkf@test.com
+2024-12-27 22:41:30,893 - INFO - Attempting registration for email: kyjfakhb@test.com
+2024-12-27 22:41:30,893 - INFO - Attempting registration for email: wcfkwhte@test.com
+2024-12-27 22:41:30,894 - INFO - Registration successful for cgicxxkn@test.com
+2024-12-27 22:41:30,894 - INFO - Attempting registration for email: sgkejokc@test.com
+2024-12-27 22:41:31,072 - INFO - Registration successful for czbjgsuw@test.com
+2024-12-27 22:41:31,072 - INFO - Attempting registration for email: gpjauwvb@test.com
+2024-12-27 22:41:31,190 - INFO - Registration successful for skidrbfv@test.com
+2024-12-27 22:41:31,190 - INFO - Registration successful for fccxedip@test.com
+2024-12-27 22:41:31,190 - INFO - Attempting registration for email: teztcicx@test.com
+2024-12-27 22:41:31,191 - INFO - Attempting registration for email: bszckqji@test.com
+2024-12-27 22:41:31,776 - INFO - Registration successful for gpjauwvb@test.com
+2024-12-27 22:41:31,776 - INFO - Attempting registration for email: rdehyceg@test.com
+2024-12-27 22:41:32,046 - INFO - Registration successful for aukvyaxb@test.com
+2024-12-27 22:41:32,047 - INFO - Attempting registration for email: hzimnyfj@test.com
+2024-12-27 22:41:32,047 - INFO - Registration successful for osyntyen@test.com
+2024-12-27 22:41:32,048 - INFO - Registration successful for robezzwj@test.com
+2024-12-27 22:41:32,048 - INFO - Attempting registration for email: qcnemmrg@test.com
+2024-12-27 22:41:32,048 - INFO - Attempting registration for email: cuxljlxo@test.com
+2024-12-27 22:41:32,554 - INFO - Registration successful for bszckqji@test.com
+2024-12-27 22:41:32,554 - INFO - Attempting registration for email: zfviksbp@test.com
+2024-12-27 22:41:32,555 - INFO - Registration successful for teztcicx@test.com
+2024-12-27 22:41:32,555 - INFO - Attempting registration for email: yftmzhfn@test.com
+2024-12-27 22:41:32,763 - INFO - Registration successful for qnxdlioi@test.com
+2024-12-27 22:41:32,765 - INFO - Registration successful for wcfkwhte@test.com
+2024-12-27 22:41:32,767 - INFO - Registration successful for kyjfakhb@test.com
+2024-12-27 22:41:32,767 - INFO - Registration successful for sgkejokc@test.com
+2024-12-27 22:41:32,973 - INFO - Registration successful for rdehyceg@test.com
+2024-12-27 22:41:32,974 - INFO - Registration successful for cuxljlxo@test.com
+2024-12-27 22:41:33,281 - INFO - Registration successful for hzimnyfj@test.com
+2024-12-27 22:41:33,284 - INFO - Registration successful for qcnemmrg@test.com
+2024-12-27 22:41:33,633 - INFO - Registration successful for zfviksbp@test.com
+2024-12-27 22:41:33,634 - INFO - Registration successful for yftmzhfn@test.com
+2024-12-27 22:41:33,635 - INFO - 
+Load Test Results:
+2024-12-27 22:41:33,635 - INFO - ==================================================
+2024-12-27 22:41:33,635 - INFO - Total Time: 18.43 seconds
+2024-12-27 22:41:33,635 - INFO - Total Requests: 100
+2024-12-27 22:41:33,635 - INFO - Successful Requests: 100
+2024-12-27 22:41:33,635 - INFO - Failed Requests: 0
+2024-12-27 22:41:33,635 - INFO - Requests per Second: 5.43
+2024-12-27 22:41:33,635 - INFO - 
+Response Time Statistics (seconds):
+2024-12-27 22:41:33,635 - INFO - Average: 1.787
+2024-12-27 22:41:33,635 - INFO - Median: 1.518
+2024-12-27 22:41:33,635 - INFO - Min: 0.667
+2024-12-27 22:41:33,635 - INFO - Max: 4.241
+2024-12-27 22:41:33,635 - INFO - 
+Detailed results saved to load_test_results_20241227_224133.json

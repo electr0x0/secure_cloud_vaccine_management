@@ -17,7 +17,7 @@ logging.basicConfig(
 )
 logger = logging.getLogger(__name__)
 
-BASE_URL = "http://localhost:8000"
+BASE_URL = "http://47.129.237.229:8000"
 
 def load_test_users(results_file):
     """Load test users from previous registration results"""
@@ -136,7 +136,7 @@ def run_login_load_test(results_file, concurrent_requests=10):
     logger.info(f"\nDetailed results saved to {results_file}")
 
 if __name__ == "__main__":
-    REGISTRATION_RESULTS_FILE = "load_test_results_20241227_001243.json"
+    REGISTRATION_RESULTS_FILE = "load_test_results_20241227_224133.json"
     CONCURRENT_REQUESTS = 10
     
     run_login_load_test(REGISTRATION_RESULTS_FILE, CONCURRENT_REQUESTS) 

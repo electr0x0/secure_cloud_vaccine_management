@@ -1,0 +1,119 @@
+2024-12-27 22:49:56,486 - INFO - Starting decrypt load test using tokens from login_load_test_results_20241227_224914.json
+2024-12-27 22:49:56,487 - INFO - Loaded 100 tokens for testing
+2024-12-27 22:49:56,487 - INFO - Using 10 concurrent requests
+2024-12-27 22:49:58,217 - INFO - Successfully retrieved user info
+2024-12-27 22:49:58,218 - INFO - Successfully retrieved user info
+2024-12-27 22:49:58,218 - INFO - Successfully retrieved user info
+2024-12-27 22:49:58,218 - INFO - Successfully retrieved user info
+2024-12-27 22:49:58,667 - INFO - Successfully retrieved user info
+2024-12-27 22:49:58,892 - INFO - Successfully retrieved user info
+2024-12-27 22:49:58,892 - INFO - Successfully retrieved user info
+2024-12-27 22:49:58,893 - INFO - Successfully retrieved user info
+2024-12-27 22:49:58,893 - INFO - Successfully retrieved user info
+2024-12-27 22:49:58,893 - INFO - Successfully retrieved user info
+2024-12-27 22:49:58,894 - INFO - Successfully retrieved user info
+2024-12-27 22:49:59,340 - INFO - Successfully retrieved user info
+2024-12-27 22:49:59,341 - INFO - Successfully retrieved user info
+2024-12-27 22:49:59,342 - INFO - Successfully retrieved user info
+2024-12-27 22:49:59,342 - INFO - Successfully retrieved user info
+2024-12-27 22:49:59,677 - INFO - Successfully retrieved user info
+2024-12-27 22:49:59,677 - INFO - Successfully retrieved user info
+2024-12-27 22:49:59,791 - INFO - Successfully retrieved user info
+2024-12-27 22:50:00,126 - INFO - Successfully retrieved user info
+2024-12-27 22:50:00,130 - INFO - Successfully retrieved user info
+2024-12-27 22:50:00,130 - INFO - Successfully retrieved user info
+2024-12-27 22:50:00,132 - INFO - Successfully retrieved user info
+2024-12-27 22:50:00,239 - INFO - Successfully retrieved user info
+2024-12-27 22:50:00,466 - INFO - Successfully retrieved user info
+2024-12-27 22:50:00,467 - INFO - Successfully retrieved user info
+2024-12-27 22:50:00,575 - INFO - Successfully retrieved user info
+2024-12-27 22:50:00,808 - INFO - Successfully retrieved user info
+2024-12-27 22:50:00,809 - INFO - Successfully retrieved user info
+2024-12-27 22:50:00,809 - INFO - Successfully retrieved user info
+2024-12-27 22:50:00,810 - INFO - Successfully retrieved user info
+2024-12-27 22:50:00,917 - INFO - Successfully retrieved user info
+2024-12-27 22:50:00,918 - INFO - Successfully retrieved user info
+2024-12-27 22:50:01,144 - INFO - Successfully retrieved user info
+2024-12-27 22:50:01,256 - INFO - Successfully retrieved user info
+2024-12-27 22:50:01,595 - INFO - Successfully retrieved user info
+2024-12-27 22:50:01,595 - INFO - Successfully retrieved user info
+2024-12-27 22:50:01,603 - INFO - Successfully retrieved user info
+2024-12-27 22:50:01,604 - INFO - Successfully retrieved user info
+2024-12-27 22:50:01,611 - INFO - Successfully retrieved user info
+2024-12-27 22:50:01,613 - INFO - Successfully retrieved user info
+2024-12-27 22:50:01,817 - INFO - Successfully retrieved user info
+2024-12-27 22:50:02,056 - INFO - Successfully retrieved user info
+2024-12-27 22:50:02,389 - INFO - Successfully retrieved user info
+2024-12-27 22:50:02,390 - INFO - Successfully retrieved user info
+2024-12-27 22:50:02,395 - INFO - Successfully retrieved user info
+2024-12-27 22:50:02,400 - INFO - Successfully retrieved user info
+2024-12-27 22:50:02,501 - INFO - Successfully retrieved user info
+2024-12-27 22:50:02,502 - INFO - Successfully retrieved user info
+2024-12-27 22:50:02,840 - INFO - Successfully retrieved user info
+2024-12-27 22:50:02,843 - INFO - Successfully retrieved user info
+2024-12-27 22:50:02,846 - INFO - Successfully retrieved user info
+2024-12-27 22:50:02,846 - INFO - Successfully retrieved user info
+2024-12-27 22:50:03,178 - INFO - Successfully retrieved user info
+2024-12-27 22:50:03,178 - INFO - Successfully retrieved user info
+2024-12-27 22:50:03,512 - INFO - Successfully retrieved user info
+2024-12-27 22:50:03,514 - INFO - Successfully retrieved user info
+2024-12-27 22:50:03,514 - INFO - Successfully retrieved user info
+2024-12-27 22:50:03,627 - INFO - Successfully retrieved user info
+2024-12-27 22:50:03,629 - INFO - Successfully retrieved user info
+2024-12-27 22:50:03,630 - INFO - Successfully retrieved user info
+2024-12-27 22:50:03,848 - INFO - Successfully retrieved user info
+2024-12-27 22:50:04,191 - INFO - Successfully retrieved user info
+2024-12-27 22:50:04,192 - INFO - Successfully retrieved user info
+2024-12-27 22:50:04,193 - INFO - Successfully retrieved user info
+2024-12-27 22:50:04,301 - INFO - Successfully retrieved user info
+2024-12-27 22:50:04,303 - INFO - Successfully retrieved user info
+2024-12-27 22:50:04,304 - INFO - Successfully retrieved user info
+2024-12-27 22:50:04,304 - INFO - Successfully retrieved user info
+2024-12-27 22:50:04,642 - INFO - Successfully retrieved user info
+2024-12-27 22:50:04,646 - INFO - Successfully retrieved user info
+2024-12-27 22:50:05,090 - INFO - Successfully retrieved user info
+2024-12-27 22:50:05,090 - INFO - Successfully retrieved user info
+2024-12-27 22:50:05,090 - INFO - Successfully retrieved user info
+2024-12-27 22:50:05,092 - INFO - Successfully retrieved user info
+2024-12-27 22:50:05,092 - INFO - Successfully retrieved user info
+2024-12-27 22:50:05,093 - INFO - Successfully retrieved user info
+2024-12-27 22:50:05,094 - INFO - Successfully retrieved user info
+2024-12-27 22:50:05,318 - INFO - Successfully retrieved user info
+2024-12-27 22:50:05,318 - INFO - Successfully retrieved user info
+2024-12-27 22:50:05,322 - INFO - Successfully retrieved user info
+2024-12-27 22:50:05,883 - INFO - Successfully retrieved user info
+2024-12-27 22:50:05,883 - INFO - Successfully retrieved user info
+2024-12-27 22:50:06,103 - INFO - Successfully retrieved user info
+2024-12-27 22:50:06,103 - INFO - Successfully retrieved user info
+2024-12-27 22:50:06,214 - INFO - Successfully retrieved user info
+2024-12-27 22:50:06,214 - INFO - Successfully retrieved user info
+2024-12-27 22:50:06,215 - INFO - Successfully retrieved user info
+2024-12-27 22:50:06,215 - INFO - Successfully retrieved user info
+2024-12-27 22:50:06,215 - INFO - Successfully retrieved user info
+2024-12-27 22:50:06,217 - INFO - Successfully retrieved user info
+2024-12-27 22:50:06,665 - INFO - Successfully retrieved user info
+2024-12-27 22:50:06,887 - INFO - Successfully retrieved user info
+2024-12-27 22:50:06,893 - INFO - Successfully retrieved user info
+2024-12-27 22:50:06,998 - INFO - Successfully retrieved user info
+2024-12-27 22:50:06,999 - INFO - Successfully retrieved user info
+2024-12-27 22:50:07,000 - INFO - Successfully retrieved user info
+2024-12-27 22:50:07,001 - INFO - Successfully retrieved user info
+2024-12-27 22:50:07,357 - INFO - Successfully retrieved user info
+2024-12-27 22:50:07,359 - INFO - Successfully retrieved user info
+2024-12-27 22:50:07,359 - INFO - Successfully retrieved user info
+2024-12-27 22:50:07,361 - INFO - 
+Decrypt Load Test Results:
+2024-12-27 22:50:07,361 - INFO - ==================================================
+2024-12-27 22:50:07,361 - INFO - Total Time: 10.87 seconds
+2024-12-27 22:50:07,361 - INFO - Total Requests: 100
+2024-12-27 22:50:07,361 - INFO - Successful Requests: 100
+2024-12-27 22:50:07,361 - INFO - Failed Requests: 0
+2024-12-27 22:50:07,361 - INFO - Requests per Second: 9.20
+2024-12-27 22:50:07,361 - INFO - 
+Response Time Statistics (seconds):
+2024-12-27 22:50:07,361 - INFO - Average: 1.056
+2024-12-27 22:50:07,361 - INFO - Median: 0.845
+2024-12-27 22:50:07,361 - INFO - Min: 0.447
+2024-12-27 22:50:07,361 - INFO - Max: 2.406
+2024-12-27 22:50:07,361 - INFO - 
+Detailed results saved to decrypt_test_results_20241227_225007.json
