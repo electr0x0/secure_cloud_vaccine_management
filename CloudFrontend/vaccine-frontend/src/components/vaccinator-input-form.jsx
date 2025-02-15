@@ -85,14 +85,14 @@ export default function VaccinationRecordComponent() {
     setIsSubmitting(true)
     try {
       // Record the vaccination
-      await axios.post(`${API}/api/vaccination-history`, {
+      await axios.post(`${API}/api/vaccinations/vaccination-history`, {
         ...values,
         is_taken: true,
         token : sessionStorage.getItem('access_token'),
       })
       
       // Fetch updated vaccination history
-      const response = await axios.get(`${API}/api/vaccination-history?email=${values.email}`)
+      const response = await axios.get(`${API}/api/vaccinations/history?email=${values.email}`)
       
       
       setVaccinationData(response.data)

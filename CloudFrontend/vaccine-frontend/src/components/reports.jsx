@@ -70,11 +70,8 @@ export function ReportsComponent() {
       try {
         setLoading(true);
         const token = sessionStorage.getItem("access_token");
-        const response = await axios.post(
-          `${API}/api/vaccination-stats`,
-          {
-            token: token,
-          }
+        const response = await axios.get(
+          `${API}/api/vaccinations/stats?token=${token}`,
         );
 
         if (response.data) {

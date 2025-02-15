@@ -40,7 +40,7 @@ export async function loginUser(formValues) {
 
 export async function getCurrentUserVaccineInfo() {
   try {
-    const response = await axios.post(`${API}/api/get-vaccination-history/by-jwt/`, {'token' : sessionStorage.getItem('access_token')});
+    const response = await axios.post(`${API}/api/vaccinations/get-vaccination-history/by-jwt/`, {'token' : sessionStorage.getItem('access_token')});
     return response.data;
   } catch (error) {
     if (axios.isAxiosError(error) && error.response) {
