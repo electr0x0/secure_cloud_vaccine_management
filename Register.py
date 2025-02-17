@@ -147,7 +147,7 @@ def run_load_test(num_requests, concurrent_requests=10):
     logger.info(f"\nDetailed results saved to {results_file}")
 
 if __name__ == "__main__":
-    NUM_REQUESTS = 1000
-    CONCURRENT_REQUESTS = 100
+    NUM_REQUESTS = 10
+    CONCURRENT_REQUESTS = 5
     
     run_load_test(NUM_REQUESTS, CONCURRENT_REQUESTS)

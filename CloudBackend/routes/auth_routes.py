@@ -5,6 +5,8 @@ from datetime import datetime
 import json
 import time
 import requests
+from prometheus_client import Counter, Histogram
+from core.metrics import ENCRYPTION_TIME, ENCRYPTION_REQUESTS, KEY_SERVER_LATENCY, CONCURRENT_OPERATIONS
 
 from core.database import get_db
 from core import auth
@@ -18,6 +20,8 @@ router = APIRouter()
 
 @router.post("/register", response_model=schemas.UserResponse)
 async def register(user: schemas.UserCreate, db: Session = Depends(get_db)):
+    CONCURRENT_OPERATIONS.labels(operation_type="encryption").inc()
+    start_time = time.time()
     try:
         # First validate identity number format
         if not validate_identity(user.identity_type, user.identity_number):
@@ -34,25 +38,22 @@ async def register(user: schemas.UserCreate, db: Session = Depends(get_db)):
             )
 
         # Generate key pair from private key server
-        try:
-            key_response = requests.post(
-                f"{KEYSERVER}/generate-key-pair",
-                params={"user_email": user.email}
-            )
-            
-            if key_response.status_code != 200:
-                raise HTTPException(
-                    status_code=500,
-                    detail="Failed to generate encryption keys"
-                )
-            public_key = key_response.json()["encoded_public_key"]
-            
-        except Exception as e:
+        key_server_start = time.time()
+        key_response = requests.post(
+            f"{KEYSERVER}/generate-key-pair",
+            params={"user_email": user.email}
+        )
+        KEY_SERVER_LATENCY.labels(operation_type="key_generation").observe(
+            time.time() - key_server_start
+        )
+        
+        if key_response.status_code != 200:
             raise HTTPException(
                 status_code=500,
-                detail="Key server communication failed"
+                detail="Failed to generate encryption keys"
             )
-
+        public_key = key_response.json()["encoded_public_key"]
+        
         # Now encrypt sensitive data with the received public key
         encrypted_identity = encrypt_with_public_key(public_key, user.identity_number)
         encrypted_phone = encrypt_with_public_key(public_key, user.phone_number) if user.phone_number else None
@@ -82,15 +83,24 @@ async def register(user: schemas.UserCreate, db: Session = Depends(get_db)):
         db.commit()
         db.refresh(db_user)
 
+        ENCRYPTION_REQUESTS.labels(
+            operation_type="registration",
+            status="success"
+        ).inc()
+        
         return {"success": True, "message": "User registered successfully"}
-
-    except HTTPException as http_ex:
-        raise http_ex
     except Exception as e:
-        raise HTTPException(
-            status_code=500,
-            detail=str(e)
-        )
+        ENCRYPTION_REQUESTS.labels(
+            operation_type="registration",
+            status="error"
+        ).inc()
+        raise
+    finally:
+        ENCRYPTION_TIME.labels(
+            operation_type="registration",
+            status="success" if "success" in locals() else "error"
+        ).observe(time.time() - start_time)
+        CONCURRENT_OPERATIONS.labels(operation_type="encryption").dec()
 
 @router.post("/login")
 def login(login_info: schemas.UserLogin, db: Session = Depends(get_db)):

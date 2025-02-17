@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Benchmark Dashboard</title>
+    <!-- Font Awesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet" />
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" rel="stylesheet" />
+    <!-- MDB -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/8.2.0/mdb.min.css" rel="stylesheet" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="{{ url_for('static', filename='css/styles.css') }}" rel="stylesheet" />
+</head>
+
+<body class="bg-light">
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary mb-3">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">
+                <i class="fas fa-tachometer-alt me-2"></i>
+                Performance Benchmark Dashboard
+            </a>
+        </div>
+    </nav>
+
+    <div class="container-fluid">
+        <div class="row">
+            <!-- Left Sidebar - Benchmark Form -->
+            <div class="col-md-3">
+                <div class="card shadow-sm mb-4">
+                    <div class="card-header bg-white">
+                        <h5 class="card-title mb-0">
+                            <i class="fas fa-play me-2"></i>
+                            Run Benchmark
+                        </h5>
+                    </div>
+                    <div class="card-body">
+                        <form id="benchmarkForm">
+                            <div class="form-outline mb-4">
+                                <select class="form-select" name="test_type" required>
+                                    <option value="register">Register</option>
+                                    <option value="login">Login</option>
+                                    <option value="decrypt">Decrypt</option>
+                                </select>
+                                <label class="form-label">Test Type</label>
+                            </div>
+                            <div class="form-outline mb-4">
+                                <input type="number" class="form-control" name="num_requests" required min="1"
+                                    value="10" />
+                                <label class="form-label">Number of Requests</label>
+                            </div>
+                            <div class="form-outline mb-4">
+                                <input type="number" class="form-control" name="concurrent_requests" required min="1"
+                                    value="5" />
+                                <label class="form-label">Concurrent Requests</label>
+                            </div>
+                            <div class="form-outline mb-4">
+                                <input type="url" class="form-control" name="base_url" required
+                                    value="http://127.0.0.1:8000" />
+                                <label class="form-label">Base URL</label>
+                            </div>
+                            <button type="submit" class="btn btn-primary w-100">
+                                <i class="fas fa-play me-2"></i>
+                                Start Benchmark
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Main Content Area -->
+            <div class="col-md-9">
+                <!-- Metrics Cards Row -->
+                <div class="row mb-4">
+                    <div class="col-md-3">
+                        <div class="card shadow-sm">
+                            <div class="card-body">
+                                <h6 class="text-muted mb-1">Server Latency</h6>
+                                <h3 id="serverLatency" class="mb-0">0ms</h3>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="card shadow-sm">
+                            <div class="card-body">
+                                <h6 class="text-muted mb-1">Success Rate</h6>
+                                <div id="successRate" class="d-flex flex-column">
+                                    <div>Encrypt: 0%</div>
+                                    <div>Decrypt: 0%</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="card shadow-sm">
+                            <div class="card-body">
+                                <h6 class="text-muted mb-1">Avg Response Time</h6>
+                                <div id="avgResponseTime" class="d-flex flex-column">
+                                    <div>Encrypt: 0ms</div>
+                                    <div>Decrypt: 0ms</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="card shadow-sm">
+                            <div class="card-body">
+                                <h6 class="text-muted mb-1">Requests/Sec</h6>
+                                <div id="requestsPerSec" class="d-flex flex-column">
+                                    <div>Encrypt: 0</div>
+                                    <div>Decrypt: 0</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Charts Row -->
+                <div class="row mb-4">
+                    <div class="col-md-6">
+                        <div class="card shadow-sm">
+                            <div class="card-header bg-white">
+                                <h5 class="card-title mb-0">
+                                    <i class="fas fa-chart-line me-2"></i>
+                                    Test Durations Timeline
+                                </h5>
+                            </div>
+                            <div class="card-body">
+                                <div id="responseTimeChart" style="height: 300px;"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="card shadow-sm">
+                            <div class="card-header bg-white">
+                                <h5 class="card-title mb-0">
+                                    <i class="fas fa-chart-pie me-2"></i>
+                                    Success/Failure Distribution
+                                </h5>
+                            </div>
+                            <div class="card-body">
+                                <div id="successRateChart" style="height: 300px;"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Full Width Logs and History -->
+        <div class="row">
+            <div class="col-12">
+                <!-- Real-time Logs -->
+                <div class="card shadow-sm mb-4">
+                    <div class="card-header bg-white">
+                        <h5 class="card-title mb-0">
+                            <i class="fas fa-terminal me-2"></i>
+                            Real-time Logs
+                        </h5>
+                    </div>
+                    <div class="card-body">
+                        <div id="logContainer" class="bg-dark text-light p-3 rounded"
+                            style="height: 400px; overflow-y: auto; font-family: monospace;">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Test History -->
+                <div class="card shadow-sm">
+                    <div class="card-header bg-white d-flex justify-content-between align-items-center">
+                        <h5 class="card-title mb-0">
+                            <i class="fas fa-history me-2"></i>
+                            Test History
+                        </h5>
+                        <button class="btn btn-sm btn-outline-primary" onclick="refreshHistory()">
+                            <i class="fas fa-sync-alt me-1"></i>
+                            Refresh
+                        </button>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table table-hover">
+                                <thead class="table-light">
+                                    <tr>
+                                        <th>Timestamp</th>
+                                        <th>Test Type</th>
+                                        <th>Requests</th>
+                                        <th>Success Rate</th>
+                                        <th>Avg Duration</th>
+                                        <th>Req/s</th>
+                                        <th>Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="historyTable">
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Test Details Modal -->
+    <div class="modal fade" id="testDetailsModal" tabindex="-1" aria-labelledby="testDetailsModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="testDetailsModalLabel">Test Details</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div id="testDetails"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+    <!-- MDB -->
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/8.2.0/mdb.umd.min.js"></script>
+    <!-- Bootstrap -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="{{ url_for('static', filename='js/dashboard.js') }}"></script>
+</body>
+
+</html>

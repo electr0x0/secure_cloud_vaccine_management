@@ -1,12 +1,18 @@
 # app/main.py
 from fastapi import FastAPI, Request
+import prometheus_client
 from starlette.middleware.base import BaseHTTPMiddleware 
 from starlette.responses import JSONResponse
 from sqlalchemy.orm import Session
 import ipaddress
+from prometheus_client import REGISTRY
+from fastapi.responses import Response
 
 from core.database import engine, Base
 from routes import key_routes
+from prometheus_fastapi_instrumentator import Instrumentator
+
+
 
 # List of allowed IPs
 ALLOWED_IPS = [
@@ -38,6 +44,22 @@ app = FastAPI(
     version="1.0.0"
 )
 
+
+instrumentator = Instrumentator()
+instrumentator.instrument(app).expose(app)
+
+
+@app.get("/metrics")
+async def metrics():
+    return Response(
+        prometheus_client.generate_latest(REGISTRY),
+        media_type="text/plain"
+    )
+
+# Initialize Prometheus metrics endpoint
+
+
+
 # Add the Tailscale middleware
 app.add_middleware(TailscaleMiddleware)
 
@@ -56,6 +78,7 @@ if __name__ == "__main__":
         reload=False,  # Disable reload in production
         workers=4,     # Multiple workers for better performance
         log_level="info",
+        limit_concurrency=100,
         proxy_headers=True,  # Trust proxy headers for proper IP handling
         forwarded_allow_ips='*'  # Allow forwarded IPs since we're behind a proxy
     )

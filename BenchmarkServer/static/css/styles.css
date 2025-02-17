@@ -1,0 +1,209 @@
+/* Custom styles */
+.card {
+    border: none;
+    transition: transform 0.2s;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
+
+.card:hover {
+    transform: translateY(-2px);
+}
+
+.card-header {
+    border-bottom: 1px solid rgba(0,0,0,0.05);
+    background-color: #f8f9fa !important;
+}
+
+.progress {
+    background-color: #f5f5f5;
+    border-radius: 10px;
+}
+
+.progress-bar {
+    border-radius: 10px;
+}
+
+#logContainer {
+    font-size: 0.85rem;
+    line-height: 1.4;
+    background-color: #1a1a1a !important;
+    padding: 1rem;
+    font-family: 'Roboto Mono', monospace;
+    height: 300px;
+    overflow-y: auto;
+}
+
+#logContainer::-webkit-scrollbar {
+    width: 8px;
+}
+
+#logContainer::-webkit-scrollbar-track {
+    background: #2a2a2a;
+}
+
+#logContainer::-webkit-scrollbar-thumb {
+    background: #666;
+    border-radius: 4px;
+}
+
+.table th {
+    font-weight: 600;
+    font-size: 0.9rem;
+}
+
+.table td {
+    font-size: 0.9rem;
+}
+
+.metric-card {
+    padding: 1.25rem;
+    border-radius: 8px;
+    text-align: center;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
+
+.metric-value {
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+}
+
+.metric-label {
+    font-size: 0.875rem;
+    color: #6c757d;
+}
+
+/* Form improvements */
+.form-outline .form-control:focus {
+    box-shadow: none;
+    border-color: #4285f4;
+}
+
+.form-outline .form-label {
+    background: white;
+}
+
+/* Custom scrollbar for the whole page */
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #888;
+    border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #555;
+}
+
+/* Dark mode support */
+@media (prefers-color-scheme: dark) {
+    body {
+        background-color: #1a1a1a;
+        color: #fff;
+    }
+
+    .card {
+        background-color: #2d2d2d;
+    }
+
+    .card-header {
+        background-color: #2d2d2d !important;
+        border-bottom: 1px solid rgba(255,255,255,0.1);
+    }
+
+    .table {
+        color: #fff;
+    }
+
+    .table-light th {
+        background-color: #3d3d3d;
+        color: #fff;
+    }
+
+    .modal-content {
+        background-color: #2d2d2d;
+        color: #fff;
+    }
+
+    .modal-header {
+        border-bottom: 1px solid rgba(255,255,255,0.1);
+    }
+
+    .form-control {
+        background-color: #3d3d3d;
+        color: #fff;
+        border-color: rgba(255,255,255,0.1);
+    }
+
+    .form-control:focus {
+        background-color: #3d3d3d;
+        color: #fff;
+    }
+}
+
+.log-entry {
+    padding: 4px 8px;
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+    white-space: pre-wrap;
+    word-wrap: break-word;
+}
+
+.log-entry:last-child {
+    border-bottom: none;
+}
+
+.log-entry.error {
+    color: #ff4444;
+    background-color: rgba(255,68,68,0.1);
+}
+
+.log-entry.success {
+    color: #00c851;
+    background-color: rgba(0,200,81,0.1);
+}
+
+.log-entry.info {
+    color: #33b5e5;
+    background-color: rgba(51,181,229,0.1);
+}
+
+.modal-dialog.modal-lg {
+    max-width: 1000px;
+}
+
+.table thead.sticky-top {
+    top: 0;
+    z-index: 1;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
+
+/* Add these styles for the metric cards */
+.card-body .d-flex.flex-column {
+    font-size: 1.25rem;
+    font-weight: 500;
+    line-height: 1.4;
+}
+
+.card-body .d-flex.flex-column div {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 0.25rem;
+}
+
+/* Update dark mode support for metric cards */
+@media (prefers-color-scheme: dark) {
+    .card-body .d-flex.flex-column {
+        color: #fff;
+    }
+    
+    .text-muted {
+        color: rgba(255,255,255,0.6) !important;
+    }
+} 

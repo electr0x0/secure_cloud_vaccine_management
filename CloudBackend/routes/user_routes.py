@@ -2,6 +2,7 @@ from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy.orm import Session
 import json
 import requests
+import time
 
 from core.database import get_db
 from core.auth import get_current_user
@@ -9,11 +10,14 @@ from core.models.models import User
 from core.models import schemas
 from services.encryption import encrypt_with_public_key
 from config import KEYSERVER
+from core.metrics import ENCRYPTION_TIME, ENCRYPTION_REQUESTS, KEY_SERVER_LATENCY, CONCURRENT_OPERATIONS
 
 router = APIRouter()
 
 @router.get("/info", response_model=schemas.UserInfoResponse)
 async def get_user_info(token: str, db: Session = Depends(get_db)):
+    CONCURRENT_OPERATIONS.labels(operation_type="decryption").inc()
+    start_time = time.time()
     try:
         # Get user email from token
         user_email = get_current_user(token, db)
@@ -25,6 +29,7 @@ async def get_user_info(token: str, db: Session = Depends(get_db)):
 
         # Get decrypted data from key server
         try:
+            start_time = time.time()
             # Decrypt identity number
             identity_response = requests.post(
                 f"{KEYSERVER}/decrypt-data",
@@ -34,6 +39,8 @@ async def get_user_info(token: str, db: Session = Depends(get_db)):
                     "data": user.identity_number
                 }
             )
+        
+            
             if identity_response.status_code != 200:
                 raise HTTPException(
                     status_code=500,
@@ -69,6 +76,9 @@ async def get_user_info(token: str, db: Session = Depends(get_db)):
                 if med_response.status_code == 200:
                     decrypted_med_data = med_response.json()["decrypted_data"]
                     decrypted_medical_conditions = json.loads(decrypted_med_data)
+                    
+            response_time = time.time() - start_time
+            KEY_SERVER_LATENCY.labels(operation_type="decryption").observe(response_time)
 
         except Exception as e:
             raise HTTPException(
@@ -76,7 +86,7 @@ async def get_user_info(token: str, db: Session = Depends(get_db)):
                 detail=f"Failed to decrypt user data: {str(e)}"
             )
 
-        return schemas.UserInfoResponse(
+        user_info = schemas.UserInfoResponse(
             first_name=user.first_name,
             last_name=user.last_name,
             email=user.email,
@@ -89,8 +99,23 @@ async def get_user_info(token: str, db: Session = Depends(get_db)):
             public_key=user.public_key
         )
 
+        ENCRYPTION_REQUESTS.labels(
+            operation_type="decryption",
+            status="success"
+        ).inc()
+        return user_info
     except Exception as e:
+        ENCRYPTION_REQUESTS.labels(
+            operation_type="decryption",
+            status="error"
+        ).inc()
         raise
+    finally:
+        ENCRYPTION_TIME.labels(
+            operation_type="decryption",
+            status="success" if "user_info" in locals() else "error"
+        ).observe(time.time() - start_time)
+        CONCURRENT_OPERATIONS.labels(operation_type="decryption").dec()
 
 @router.put("/update", response_model=schemas.UserInfoResponse)
 async def update_user_info(user_update: schemas.UserUpdate, db: Session = Depends(get_db)):

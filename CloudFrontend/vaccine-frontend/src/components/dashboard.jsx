@@ -1,7 +1,6 @@
 "use client";
 
 import React from "react";
-
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
@@ -17,6 +16,9 @@ import {
   Package,
   Heart,
   HelpCircle,
+  Activity,
+  Cpu,
+  AlertTriangle
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import menuItems from "@/data/menuItems.json";
@@ -31,47 +33,38 @@ const iconMap = {
   Package,
   Heart,
   HelpCircle,
+  Activity,
+  Cpu,
+  AlertTriangle
 };
 
 import { Faq } from "./faq";
 import { ProfileComponent } from "./profile";
-import { HealthTipsComponent } from "./health-tips";
 import { ReportsComponent } from "./reports";
 import VaccinationRecordComponent from "./vaccinator-input-form";
 import VaccinationDashboard from "./vaccination-dashboard";
-import { getCurrentUserVaccineInfo } from "./api";
 import VaccinationCheck from "./vaccination-check";
+import { HealthTipsComponent } from "./health-tips";
+
+const componentMap = {
+  "vaccination-input-form": VaccinationRecordComponent,
+  "my-vaccinations": VaccinationDashboard,
+  "vaccination-checker": VaccinationCheck,
+  "profile": ProfileComponent,
+  "reports": ReportsComponent,
+  "health-tips": HealthTipsComponent,
+  "faq": Faq,
+}
 
 export default function Dashboard() {
-  const componentMap = {
-    "vaccination-input-form": VaccinationRecordComponent,
-    "my-vaccinations": VaccinationDashboard,
-    profile: ProfileComponent,
-    reports: ReportsComponent,
-    "health-tips": HealthTipsComponent,
-    faq: Faq,
-    "vaccination-checker": VaccinationCheck,
-    // ... other components
-  };
-
-  const [userGroup, setUserGroup] = useState(null);
-  const [isExpanded, setIsExpanded] = useState(false);
-  const [isPinned, setIsPinned] = useState(false);
   const [activeComponent, setActiveComponent] = useState(null);
   const router = useRouter();
 
   useEffect(() => {
-    const storedUserGroup = sessionStorage.getItem("userGroup");
-
-    if (storedUserGroup === "1") {
-      setActiveComponent("my-vaccinations");
-    } else if (storedUserGroup === "2") {
-      setActiveComponent("vaccination-input-form");
-    }
-    if (!storedUserGroup) {
+    // Check if user is logged in
+    const token = sessionStorage.getItem("access_token");
+    if (!token) {
       router.push("/login");
-    } else {
-      setUserGroup(storedUserGroup);
     }
   }, [router]);
 
@@ -80,60 +73,15 @@ export default function Dashboard() {
     router.push("/login");
   };
 
-  const togglePin = () => {
-    setIsPinned(!isPinned);
-    setIsExpanded(!isPinned);
-  };
-
-  const handleMenuItemClick = (componentName) => {
-    setActiveComponent(componentName);
-  };
-
-  if (!userGroup) {
-    return <div>Loading...</div>;
-  }
-
+  const userGroup = sessionStorage.getItem("userGroup");
   const filteredMenuItems = menuItems.filter(
-    (item) => item.user_group === "all" || item.user_group === userGroup
+    item => item.user_group === userGroup || item.user_group === "all"
   );
 
   return (
-    <div className="flex h-screen bg-gray-100">
-      <aside
-        className={cn(
-          "bg-white shadow-md transition-all duration-300 ease-in-out flex flex-col",
-          isExpanded || isPinned ? "w-64" : "w-16"
-        )}
-        onMouseEnter={() => !isPinned && setIsExpanded(true)}
-        onMouseLeave={() => !isPinned && setIsExpanded(false)}
-      >
-        <div className="p-4 flex items-center justify-between">
-          <h2
-            className={cn(
-              "font-bold text-xl transition-opacity duration-300",
-              isExpanded || isPinned ? "opacity-100" : "opacity-0 w-0"
-            )}
-          >
-            Vaccine Dashboard
-          </h2>
-          <Button
-            variant="ghost"
-            size="icon"
-            onClick={togglePin}
-            className={cn(
-              "transition-opacity duration-300",
-              isExpanded || isPinned ? "opacity-100" : "opacity-0"
-            )}
-          >
-            <ChevronRight
-              className={cn(
-                "h-4 w-4 transition-transform",
-                isPinned && "rotate-180"
-              )}
-            />
-          </Button>
-        </div>
-        <nav className="flex-1 overflow-y-auto">
+    <div className="flex h-screen overflow-hidden">
+      <aside className="w-64 bg-gray-800 text-white p-4">
+        <nav className="space-y-2">
           {filteredMenuItems.map((item, index) => {
             const Icon = iconMap[item.icon];
             return (
@@ -141,38 +89,26 @@ export default function Dashboard() {
                 key={index}
                 variant="ghost"
                 className={cn(
-                  "w-full justify-start px-4 py-2 transition-all duration-300 ease-in-out",
-                  isExpanded || isPinned ? "text-left" : "justify-center"
+                  "w-full justify-start text-white hover:text-white hover:bg-gray-700",
+                  activeComponent === item.component && "bg-gray-700"
                 )}
-                onClick={() => handleMenuItemClick(item.component)}
+                onClick={() => setActiveComponent(item.component)}
               >
-                <Icon className="h-5 w-5 mr-2 flex-shrink-0" />
-                <span
-                  className={cn(
-                    "transition-opacity duration-300 whitespace-nowrap",
-                    isExpanded || isPinned ? "opacity-100" : "opacity-0 w-0"
-                  )}
-                >
+                {Icon && <Icon className="mr-2 h-4 w-4" />}
+                <span className="text-sm font-medium">
                   {item.label}
                 </span>
               </Button>
             );
           })}
+
           <Button
             variant="ghost"
-            className={cn(
-              "w-full justify-start px-4 py-2 transition-all duration-300 ease-in-out",
-              isExpanded || isPinned ? "text-left" : "justify-center"
-            )}
+            className="w-full justify-start text-white hover:text-white hover:bg-gray-700"
             onClick={handleLogout}
           >
-            <LogOut className="h-5 w-5 mr-2 flex-shrink-0" />
-            <span
-              className={cn(
-                "transition-opacity duration-300 whitespace-nowrap",
-                isExpanded || isPinned ? "opacity-100" : "opacity-0 w-0"
-              )}
-            >
+            <LogOut className="mr-2 h-4 w-4" />
+            <span className="text-sm font-medium">
               Logout
             </span>
           </Button>

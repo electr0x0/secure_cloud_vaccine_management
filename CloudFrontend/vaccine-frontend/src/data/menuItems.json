@@ -12,7 +12,7 @@
     "component" : "my-vaccinations"
   },
   {
-    "label" : "View Vaccination Records",
+    "label": "View Vaccination Records",
     "icon" : "FileText",
     "user_group" : "2",
     "component" : "vaccination-checker"

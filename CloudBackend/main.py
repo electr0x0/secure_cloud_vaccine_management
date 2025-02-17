@@ -1,6 +1,10 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
+import prometheus_client
 from sqlalchemy.orm import Session
+from prometheus_fastapi_instrumentator import Instrumentator, metrics
+from prometheus_client import Counter, Histogram, Gauge, REGISTRY
+from fastapi.responses import Response
 
 from core.database import SessionLocal, engine, Base
 from core.models.models import VaccinationType
@@ -32,6 +36,22 @@ Base.metadata.create_all(bind=engine)
 app.include_router(auth_routes.router, tags=["Authentication"])
 app.include_router(user_routes.router, prefix="/api/user", tags=["User Management"])
 app.include_router(vaccination_routes.router, prefix="/api/vaccinations", tags=["Vaccination Records"])
+
+
+instrumentator = Instrumentator()
+instrumentator.instrument(app).expose(app)
+
+
+@app.get("/metrics")
+async def metrics():
+    return Response(
+        prometheus_client.generate_latest(REGISTRY),
+        media_type="text/plain"
+    )
+
+@app.get("/")
+async def root():
+    return {"message": "Server is running"}
 
 # Seed initial data
 def seed_vaccine_types(db: Session):
@@ -94,5 +114,8 @@ if __name__ == "__main__":
         host="0.0.0.0",
         port=8000,
         reload=False,  # Disable reload in production
-        workers=4      # Multiple workers for better performance
+        workers=4,
+        limit_concurrency=100,
+        timeout_keep_alive=30,
+        timeout_graceful_shutdown=30
     )
