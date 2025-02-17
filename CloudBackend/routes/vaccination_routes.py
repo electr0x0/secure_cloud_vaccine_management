@@ -246,19 +246,22 @@ def get_vaccination_stats(token: str, db: Session = Depends(get_db)):
         )
 
         # Create a dictionary with all months initialized to 0
-        month_names = ['January', 'February', 'March', 'April', 'May', 'June', 
-                      'July', 'August', 'September', 'October', 'November', 'December']
-        monthly_data = {month: 0 for month in month_names}
+        monthly_data = {i: 0 for i in range(1, 13)}
         
         # Update with actual values
         for stat in monthly_stats:
-            monthly_data[month_names[stat.month-1]] = stat.count
+            # Convert Decimal to int for month
+            month_num = int(stat.month)
+            monthly_data[month_num] = stat.count
 
-        # Convert to list format
+        # Convert to list format with proper ordering
         monthly_data = [
-            {"month": month, "vaccinations": count}
+            {"month": int(month), "vaccinations": count}
             for month, count in monthly_data.items()
         ]
+
+        # Sort by month number to ensure correct ordering
+        monthly_data.sort(key=lambda x: x["month"])
 
         # Query vaccine type distribution
         vaccine_stats = (
@@ -273,7 +276,7 @@ def get_vaccination_stats(token: str, db: Session = Depends(get_db)):
         )
 
         vaccine_distribution = [
-            {"name": stat.vaccine_name, "value": stat.count}
+            {"name": stat.vaccine_name, "value": int(stat.count)}
             for stat in vaccine_stats
         ]
 

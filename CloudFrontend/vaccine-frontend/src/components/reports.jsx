@@ -19,6 +19,11 @@ const COLORS = [
   "#82ca9d",
 ];
 
+const MONTHS = [
+  'January', 'February', 'March', 'April', 'May', 'June',
+  'July', 'August', 'September', 'October', 'November', 'December'
+];
+
 const ChartWrapper = ({ children }) => {
   const [mounted, setMounted] = useState(false);
 
@@ -75,10 +80,23 @@ export function ReportsComponent() {
         );
 
         if (response.data) {
-          setMonthlyData(response.data.monthly_data || []);
-          setVaccineData(response.data.vaccine_distribution || []);
+          // Process monthly data to ensure proper month ordering
+          const processedMonthlyData = response.data.monthly_data.map(item => ({
+            month: typeof item.month === 'number' ? MONTHS[Math.floor(item.month - 1)] : item.month,
+            vaccinations: parseInt(item.vaccinations)
+          }));
+
+          // Process vaccine distribution data
+          const processedVaccineData = response.data.vaccine_distribution.map(item => ({
+            name: item.name,
+            value: parseInt(item.value)
+          }));
+
+          setMonthlyData(processedMonthlyData);
+          setVaccineData(processedVaccineData);
         }
       } catch (err) {
+        console.error('API Error:', err);
         setError(err.response?.data?.detail || "Failed to fetch statistics");
       } finally {
         setLoading(false);
@@ -106,13 +124,13 @@ export function ReportsComponent() {
       enabled: false
     },
     xaxis: {
-      categories: monthlyData.map(item => item.month) || [],
+      categories: monthlyData.map(item => item.month),
       type: 'category'
     },
     yaxis: {
       labels: {
         formatter: function (val) {
-          return val.toFixed(0)
+          return Math.round(val)
         }
       },
       min: 0
