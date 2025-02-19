@@ -10,7 +10,7 @@ from config import ENCRYPTION_METHOD
 import os
 
 def generate_rsa_key_pair():
-    
+    """Generate RSA key pair with 2048-bit key size"""
     private_key = rsa.generate_private_key(
         public_exponent=65537,
         key_size=2048
@@ -31,7 +31,7 @@ def generate_rsa_key_pair():
     return private_key_pem, public_key_pem
 
 def generate_key_pair():
-    """Factory function that generates key pair based on configured method"""
+    """Generate key pair based on configured method"""
     if ENCRYPTION_METHOD == "X25519":
         return generate_x25519_key_pair()
     return generate_rsa_key_pair()
@@ -75,7 +75,7 @@ def generate_x25519_key_pair():
     return private_key_bundle, public_key_bundle
 
 def store_user_key_pair(db: Session, user_email: str):
-    """Remains unchanged, uses the factory function"""
+    """Key generation and storage"""
     private_key_pem, public_key_pem = generate_key_pair()
     private_key_encoded = base64.b64encode(private_key_pem).decode('utf-8')
     public_key_encoded = base64.b64encode(public_key_pem).decode('utf-8')
@@ -100,6 +100,8 @@ def decrypt_data(db: Session, user_email: str, encrypted_data: str) -> str:
 
 def decrypt_x25519(private_key_bundle: bytes, encrypted_data: str) -> str:
     try:
+        """Decrypt data using X25519 key pair"""
+        
         # Split the bundle to get the encryption key
         private_key_parts = private_key_bundle.split(b"-----BEGIN")
         private_key_pem = b"-----BEGIN" + private_key_parts[1].split(b"-----BEGIN")[0]
@@ -118,6 +120,7 @@ def decrypt_x25519(private_key_bundle: bytes, encrypted_data: str) -> str:
         
         # In X25519, we expect the encrypted data to be in format:
         # [ephemeral_pub_key(32) | nonce(12) | ciphertext | tag(16)]
+        
         if len(encrypted_bytes) < 60:  # Minimum length check (32 + 12 + 16)
             raise ValueError("Encrypted data too short")
             
@@ -147,7 +150,7 @@ def decrypt_x25519(private_key_bundle: bytes, encrypted_data: str) -> str:
         raise ValueError(f"Decryption error: {str(e)}")
 
 def decrypt_rsa(private_key_pem: bytes, encrypted_data: str) -> str:
-    """Existing RSA decryption logic"""
+    """Simple RSA decryption"""
     private_key = serialization.load_pem_private_key(
         private_key_pem,
         password=None

@@ -27,9 +27,7 @@ print(f"SERVER_PORT: {SERVER_PORT}")
 print(f"FRONTEND_URL: {FRONTEND_URL}")
 print(f"ENVIRONMENT: {ENVIRONMENT}")
 
-# SQLALCHEMY_DATABASE_URL = f"mysql+mysqlconnector://{DB_USER}:{DB_PASSWORD}@{DB_SERVER}/{DB_NAME}"
-
 SQLALCHEMY_DATABASE_URL = f"postgresql://{DB_USER}:{DB_PASSWORD}@{DB_SERVER}:{DB_PORT}/{DB_NAME}"
 
 # Add encryption method configuration
-ENCRYPTION_METHOD = "X25519"  # Default to RSA for backward compatibility
+ENCRYPTION_METHOD = "os.getenv('ENCRYPTION_METHOD')"  # Default to RSA for backward compatibility

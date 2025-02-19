@@ -1,4 +1,4 @@
-// Initialize charts
+
 let responseTimeChart, successRateChart;
 let currentTestData = {
     durations: [],
@@ -7,30 +7,30 @@ let currentTestData = {
     total: 0
 };
 
-// Remove socket.io related code and add polling for logs
+
 let isPollingLogs = false;
 let logPollingInterval;
 let isRunningTest = false;
 
-// Add a variable to track the last seen log
+
 let lastSeenLogs = new Set();
 
-// Initialize on page load
+
 document.addEventListener('DOMContentLoaded', function() {
     initializeCharts();
-    updateMetrics();  // Initial metrics load
+    updateMetrics(); 
     refreshHistory();
     
-    // Start log polling immediately
+    
     startLogPolling();
     
-    // Initialize form submission
+    
     const form = document.getElementById('benchmarkForm');
     form.addEventListener('submit', handleFormSubmit);
 });
 
 function initializeCharts() {
-    // Test Duration Timeline Chart
+    
     responseTimeChart = new ApexCharts(document.querySelector("#responseTimeChart"), {
         chart: {
             type: 'bar',
@@ -104,13 +104,13 @@ function initializeCharts() {
     successRateChart.render();
 }
 
-// Add log polling functions
+
 function startLogPolling() {
     if (!isPollingLogs) {
         isPollingLogs = true;
         // Poll immediately first
         pollLogs();
-        // Then set up the interval
+        
         logPollingInterval = setInterval(pollLogs, 2000); // Poll every 2 seconds
     }
 }
@@ -484,7 +484,7 @@ window.addEventListener('beforeunload', () => {
     stopLogPolling();
 });
 
-// Add this function to fetch and update metrics
+
 async function updateMetrics() {
     try {
         const response = await fetch('/api/metrics');

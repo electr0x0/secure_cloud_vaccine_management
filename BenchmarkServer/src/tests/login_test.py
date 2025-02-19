@@ -15,7 +15,7 @@ def login_user(credentials, base_url):
     try:
         logger.info(f"Attempting login for email: {credentials['email']}")
         
-        response = requests.post(f"{base_url}/login", json=credentials, timeout=10)
+        response = requests.post(f"{base_url}/login", json=credentials, timeout=30)
         end_time = time.time()
         duration = end_time - start_time
         

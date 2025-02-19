@@ -1,12 +1,48 @@
 import re
-import aiohttp
 import json
 import time
 import os
+import requests
+from concurrent.futures import ThreadPoolExecutor
 from src.core.logger import get_logger
 from src.core.config import settings
 
 logger = get_logger(__name__)
+
+def process_request(token: str, base_url: str, request_num: int, num_requests: int) -> dict:
+    """Process a single request"""
+    try:
+        req_start = time.time()
+        response = requests.get(
+            f"{base_url}/api/user/info",
+            params={"token": token},
+            timeout=30
+        )
+        duration = time.time() - req_start
+        
+        success = response.status_code == 200
+        if not success:
+            logger.error(f"Decrypt failed: {response.text}")
+
+        result = {
+            "success": success,
+            "duration": duration,
+            "status_code": response.status_code,
+            "token": token,
+            "response": response.text
+        }
+        logger.info(f"{request_num+1}/{num_requests} Decryption completed")
+        return result
+
+    except Exception as e:
+        logger.error(f"Request failed: {str(e)}")
+        return {
+            "success": False,
+            "duration": 0,
+            "status_code": 500,
+            "token": token,
+            "error": str(e)
+        }
 
 async def run_decrypt_test(num_requests: int, concurrent_requests: int, base_url: str, login_results_file: str) -> dict:
     """Run decrypt load test using tokens from login test"""
@@ -19,7 +55,6 @@ async def run_decrypt_test(num_requests: int, concurrent_requests: int, base_url
         if result["success"]:
             result_json = json.loads(result["response"])
             if "access_token" in result_json:
-                print(result_json["access_token"])
                 tokens.append(result_json["access_token"])
 
     if not tokens:
@@ -28,40 +63,20 @@ async def run_decrypt_test(num_requests: int, concurrent_requests: int, base_url
     results = []
     start_time = time.time()
 
-    async with aiohttp.ClientSession() as session:
-        for i in range(num_requests):
-            token = tokens[i % len(tokens)]
+    # Use ThreadPoolExecutor for concurrent requests
+    with ThreadPoolExecutor(max_workers=concurrent_requests) as executor:
+        futures = [
+            executor.submit(process_request, tokens[i % len(tokens)], base_url, i, num_requests)
+            for i in range(num_requests)
+        ]
+        
+        # Collect results as they complete
+        for future in futures:
             try:
-                req_start = time.time()
-                async with session.get(
-                    f"{base_url}/api/user/info?token={token}",
-                    timeout=30
-                ) as response:
-                    duration = time.time() - req_start
-                    text = await response.text()
-                    
-                    success = response.status == 200
-                    if not success:
-                        logger.error(f"Decrypt failed: {text}")
-
-                    results.append({
-                        "success": success,
-                        "duration": duration,
-                        "status_code": response.status,
-                        "token": token,
-                        "response": text
-                    })
-                logger.info(f"{i+1}/{num_requests} Decryption completed")
-
+                result = future.result()
+                results.append(result)
             except Exception as e:
-                logger.error(f"Request failed: {str(e)}")
-                results.append({
-                    "success": False,
-                    "duration": 0,
-                    "status_code": 500,
-                    "token": token,
-                    "error": str(e)
-                })
+                logger.error(f"Future failed: {str(e)}")
 
     end_time = time.time()
     total_duration = end_time - start_time
@@ -91,13 +106,13 @@ async def run_decrypt_test(num_requests: int, concurrent_requests: int, base_url
     timestamp = time.strftime("%Y%m%d_%H%M%S")
     
     result = {
-                "num_requests": num_requests,
-                "concurrent_requests": concurrent_requests,
-                "base_url": base_url,
-                "timestamp": timestamp,
-                "login_results": login_results_file,
-                **summary,
-                "detailed_results": results
-            } 
+        "num_requests": num_requests,
+        "concurrent_requests": concurrent_requests,
+        "base_url": base_url,
+        "timestamp": timestamp,
+        "login_results": login_results_file,
+        **summary,
+        "detailed_results": results
+    } 
 
     return result

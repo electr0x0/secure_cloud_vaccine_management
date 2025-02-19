@@ -9,7 +9,7 @@ class Settings(BaseSettings):
 
     def __init__(self):
         super().__init__()
-        # Create directories if they don't exist
+        
         os.makedirs(self.RESULTS_DIR, exist_ok=True)
         os.makedirs(self.LOG_DIR, exist_ok=True)
 

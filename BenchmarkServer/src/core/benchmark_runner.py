@@ -29,7 +29,7 @@ class BenchmarkRunner:
         
         # Create initial test state
         test_state = {
-            "test_id": test_id,  # Use the generated test_id
+            "test_id": test_id,
             "test_type": test_type,
             "start_time": datetime.now().isoformat(),
             "total_requests": num_requests,
@@ -37,7 +37,7 @@ class BenchmarkRunner:
             "base_url": base_url
         }
 
-        # Create result file path
+       
         result_file = os.path.join(settings.RESULTS_DIR, f"{test_id}.json")
 
         try:
@@ -45,7 +45,7 @@ class BenchmarkRunner:
             with open(result_file, 'w') as f:
                 json.dump(test_state, f, indent=2)
 
-            # Import and run the appropriate test
+            
             if test_type == "register":
                 from src.tests.register_test import run_register_test
                 results = await run_register_test(num_requests, concurrent_requests, base_url)
@@ -65,7 +65,7 @@ class BenchmarkRunner:
                 **results
             })
 
-            # Save final results
+            
             with open(result_file, 'w') as f:
                 json.dump(test_state, f, indent=2)
 
@@ -73,7 +73,7 @@ class BenchmarkRunner:
 
         except Exception as e:
             logger.error(f"Test failed: {str(e)}")
-            # Update test state with error
+            
             error_state = {
                 "test_id": test_id,  # Ensure test_id is included
                 "test_type": test_type,

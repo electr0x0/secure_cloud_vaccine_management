@@ -11,7 +11,7 @@ router = APIRouter()
 
 @router.post("/generate-key-pair", response_model=schemas.KeyResponse)
 async def generate_key_pair(user_email: str, db: Session = Depends(get_db)):
-    """Generates and stores a new RSA key pair for a user and returns the public key."""
+    """Generates and stores a new RSA/X25519 key pair for a user and returns the public key."""
     try:
         start_time = time.time()
         public_key = store_user_key_pair(db, user_email)

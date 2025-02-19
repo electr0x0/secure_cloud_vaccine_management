@@ -39,7 +39,7 @@ def register_user(user_data, base_url):
         logger.info(f"Attempting Encryption for user email: {user_data['email']}")
         logger.debug(f"Request payload: {json.dumps(user_data, indent=2)}")
         
-        response = requests.post(f"{base_url}/register", json=user_data, timeout=10)
+        response = requests.post(f"{base_url}/register", json=user_data, timeout=30)
         end_time = time.time()
         duration = end_time - start_time
         

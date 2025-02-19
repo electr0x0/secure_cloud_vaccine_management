@@ -174,7 +174,7 @@ def get_metrics():
     """Get combined metrics for encrypt/decrypt operations"""
     try:
         # Test server latency (ping)
-        target_server = "http://127.0.0.1:8000"  # Hardcoded server
+        target_server = "http://13.212.32.5:8000"  # Hardcoded server
         ping_times = []
         for _ in range(3):  # Take average of 3 pings
             start = time.time()
